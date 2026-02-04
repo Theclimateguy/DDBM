@@ -2,7 +2,7 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![arXiv](https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg)](https://arxiv.org/abs/XXXX.XXXXX)
+[![arXiv](https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg)](https://arxiv.org/abs/XXXX.XXXXX) - archive link will be provided later with an article release^ for now consult DDBM_Methodology.md
 
 **A statistical framework for distinguishing chaotic dynamics from periodic oscillations and noise in time series data.**
 
@@ -59,7 +59,7 @@ pip install git+https://github.com/yourusername/DDBM.git
 The mathematical foundation and theoretical proofs are detailed in our arXiv preprint:
 
 > **Diophantine Phase Detection for Time Series Classification**  
-> [Your Name] (2026). arXiv:XXXX.XXXXX  
+> [Nazar Sotiriadi] (2026). arXiv:XXXX.XXXXX  
 > https://arxiv.org/abs/XXXX.XXXXX
 
 **Core principle:** Chaotic attractors with non-integer fractal dimension generate quantization artifacts that violate uniformity in modular arithmetic space.
@@ -71,9 +71,9 @@ If you use DDBM in research, please cite:
 ```bibtex
 @misc{ddbm2026,
   title={Diophantine Dynamical Boundary Method for Chaos Detection},
-  author={Your Name},
+  author={Nazar Sotiriadi},
   year={2026},
-  eprint={XXXX.XXXXX},
+  preprint={XXXX.XXXXX},
   archivePrefix={arXiv},
   primaryClass={nlin.CD}
 }
@@ -86,11 +86,10 @@ MIT License. See [LICENSE](LICENSE) for details.
 ## Contact
 
 - Issues: [GitHub Issues](https://github.com/yourusername/DDBM/issues)
-- Email: your.email@domain.com
+- Email: n.sotiriadi@gmail.com
 - arXiv: https://arxiv.org/abs/XXXX.XXXXX
 
 ---
 
 **Version:** 7.1  
-**Status:** Production-ready  
 **Last updated:** February 2026
