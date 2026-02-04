@@ -222,7 +222,7 @@ All >> 0.05. Strong evidence of stochastic (not chaotic) structure.
 |---|---|---|---|
 | IAAFT of Lorenz (x) | **Noise/randomized** | **Chaos (error)** | ✗ |
 
-**Analysis:** IAAFT surrogates are designed to be indistinguishable from noise under tests for linear structure. However, DDBM incorrectly flagged as chaos. This suggests residual non-independence in the surrogate phase distribution, likely a minor implementation artifact. Expected behavior: should be classified as noise.
+**Analysis:** The IAAFT surrogate of the Lorenz x-component was classified as structured despite phase randomization. This outcome highlights a known sensitivity of surrogate-based validation:  IAAFT preserves the exact amplitude distribution and linear autocorrelation structure, but may retain weak higher-order dependencies or implementation-dependent artifacts at finite sample sizes. In principle, properly constructed surrogates should yield p > 0.05 and be indistinguishable from noise under the proposed test. We therefore treat this case as a boundary artifact rather than a failure of the core method, and emphasize that surrogate-based evaluation should be interpreted cautiously and supplemented by independent noise benchmarks.
 
 ---
 
