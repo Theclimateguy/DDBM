@@ -30,17 +30,10 @@ Given a time series $x_1,\dots,x_n$:
 Classification requires structure detection at the residual level to reduce confounding by trends/linear dynamics.
 
 2) **Lattice quantization**
-For $K \in \{10,15,\dots,1000\}$, map $u_t\in[0,1]$ to integers
-$$
-N_t=\lfloor Ku_t+0.5\rfloor.
-$$
+For $K \in \{10,15,\dots,1000\}$, map $u_t\in[0,1]$ to integers $N_t=\lfloor Ku_t+0.5\rfloor.$
 
 3) **Diophantine phase construction**
-Using the cubic kernel
-$$
-S_3(N)=3N^2+3N+1,
-$$
-and increments $\Delta N_t=N_{t+1}-N_t$, compute a normalized modular phase $\Xi_t\in[0,1)$.
+Using the cubic kernel $S_3(N)=3N^2+3N+1$ and increments $\Delta N_t=N_{t+1}-N_t$, compute a normalized modular phase $\Xi_t\in[0,1)$.
 
 4) **Uniformity testing across $K$**
 Test $H_0:\ \Xi_t \sim \mathrm{Uniform}(0,1)$ using a KS-based goodness-of-fit procedure with multiple-testing correction over scanned $K$ values; rejection implies “structured”.
