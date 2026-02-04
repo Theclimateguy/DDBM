@@ -4,48 +4,48 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- arXiv badge/link will be added after submission -->
 
-DDBM is a statistical method for distinguishing deterministic chaotic dynamics from periodic/quasi-periodic oscillations and noise in **univariate** time series, without phase-space reconstruction or training data. [file:1]
+DDBM is a statistical method for distinguishing deterministic chaotic dynamics from periodic/quasi-periodic oscillations and noise in **univariate** time series, without phase-space reconstruction or training data. 
 
-Repository: https://github.com/Theclimateguy/DDBM [file:1]
+Repository: https://github.com/Theclimateguy/DDBM 
 
 ## Motivation
 
-In climate science, finance, and other complex systems, a practical question precedes modeling: does the observed signal contain deterministic structure (potentially exploitable for prediction/control), or is it indistinguishable from a stochastic process after removing trends and linear dependence? [file:1]
+In climate science, finance, and other complex systems, a practical question precedes modeling: does the observed signal contain deterministic structure (potentially exploitable for prediction/control), or is it indistinguishable from a stochastic process after removing trends and linear dependence? 
 
-Common chaos diagnostics often require embedding choices, long sample sizes, or are sensitive to colored noise, motivating a conservative screening procedure that operates directly on scalar observables with formal hypothesis testing. [file:1]
+Common chaos diagnostics often require embedding choices, long sample sizes, or are sensitive to colored noise, motivating a conservative screening procedure that operates directly on scalar observables with formal hypothesis testing. 
 
 ## Core idea (Diophantine lattice resonance)
 
-Chaotic attractors typically carry singular (fractal) invariant measures; when a scalar observable is rank-normalized to [0,1] and quantized onto an integer lattice, the trajectory occupies a sparse subset of bins at certain resolutions. [file:1]
+Chaotic attractors typically carry singular (fractal) invariant measures; when a scalar observable is rank-normalized to [0,1] and quantized onto an integer lattice, the trajectory occupies a sparse subset of bins at certain resolutions. 
 
-DDBM amplifies this sparsity by mapping quantized states through modular arithmetic, producing a “Diophantine phase” whose empirical distribution deviates from Uniform(0,1) for resonant quantization scales in deterministic chaos, while i.i.d. noise remains asymptotically equidistributed. [file:1]
+DDBM amplifies this sparsity by mapping quantized states through modular arithmetic, producing a “Diophantine phase” whose empirical distribution deviates from Uniform(0,1) for resonant quantization scales in deterministic chaos, while i.i.d. noise remains asymptotically equidistributed. 
 
 ## Method (high level)
 
-Given a time series \(x_1,\dots,x_n\): [file:1]
+Given a time series \(x_1,\dots,x_n\): 
 
 1) **Two-level preprocessing**
-- Level 1 (raw): rank/quantile normalization to \([0,1]\). [file:1]
-- Level 2 (residual): linear detrending, then AR(1) prewhitening; optionally standardize conditional volatility if ARCH effects are detected (Ljung–Box on squared residuals). [file:1]
-Classification requires structure detection at the residual level to reduce confounding by trends/linear dynamics. [file:1]
+- Level 1 (raw): rank/quantile normalization to \([0,1]\). 
+- Level 2 (residual): linear detrending, then AR(1) prewhitening; optionally standardize conditional volatility if ARCH effects are detected (Ljung–Box on squared residuals). 
+Classification requires structure detection at the residual level to reduce confounding by trends/linear dynamics. 
 
 2) **Lattice quantization**
-For \(K \in \{10,15,\dots,1000\}\), map \(u_t\in[0,1]\) to integers \(N_t=\lfloor Ku_t+0.5\rfloor\). [file:1]
+For \(K \in \{10,15,\dots,1000\}\), map \(u_t\in[0,1]\) to integers \(N_t=\lfloor Ku_t+0.5\rfloor\). 
 
 3) **Diophantine phase construction**
-Using the cubic kernel \(S_3(N)=3N^2+3N+1\) and a cubic residual built from \(N_t\) and \(\Delta N_t=N_{t+1}-N_t\), compute a normalized modular phase \(\Xi_t\in[0,1)\). [file:1]
+Using the cubic kernel \(S_3(N)=3N^2+3N+1\) and a cubic residual built from \(N_t\) and \(\Delta N_t=N_{t+1}-N_t\), compute a normalized modular phase \(\Xi_t\in[0,1)\). 
 
 4) **Uniformity testing across K**
-Test \(H_0:\ \Xi_t \sim \mathrm{Uniform}(0,1)\) using a KS-based goodness-of-fit procedure with multiple-testing correction over the scanned \(K\) values; rejection implies “structured”. [file:1]
+Test \(H_0:\ \Xi_t \sim \mathrm{Uniform}(0,1)\) using a KS-based goodness-of-fit procedure with multiple-testing correction over the scanned \(K\) values; rejection implies “structured”. 
 
 5) **Regularity filter**
-After “structured” is detected, separate chaos vs regular dynamics using spectral concentration and autocorrelation persistence (plus a high permutation-entropy gate), yielding labels like CHAOS vs REGULAR; otherwise classify as NOISE/NOT-CHAOS-CANDIDATE. [file:1]
+After “structured” is detected, separate chaos vs regular dynamics using spectral concentration and autocorrelation persistence (plus a high permutation-entropy gate), yielding labels like CHAOS vs REGULAR; otherwise classify as NOISE/NOT-CHAOS-CANDIDATE. 
 
 ## Validation (benchmark summary)
 
-On 40 benchmark systems spanning canonical chaotic attractors (Lorenz, Hénon, Rössler, Chua, logistic map), periodic/quasi-periodic dynamics, and stochastic processes (i.i.d. noise, AR, GARCH, random walk, plus financial data), the current report is **92.5% overall accuracy (37/40)**. [file:1]
+On 40 benchmark systems spanning canonical chaotic attractors (Lorenz, Hénon, Rössler, Chua, logistic map), periodic/quasi-periodic dynamics, and stochastic processes (i.i.d. noise, AR, GARCH, random walk, plus financial data), the current report is **92.5% overall accuracy (37/40)**. 
 
-In that benchmark set, i.i.d. Gaussian white noise produced zero false positives, while observed misclassifications concentrate at boundary cases: quasi-periodic irrational rotations (circle map), very low SNR chaos+noise mixtures (~5 dB), and an IAAFT surrogate artifact. [file:1]
+In that benchmark set, i.i.d. Gaussian white noise produced zero false positives, while observed misclassifications concentrate at boundary cases: quasi-periodic irrational rotations (circle map), very low SNR chaos+noise mixtures (~5 dB), and an IAAFT surrogate artifact. 
 
 ## Quick start (API-style example)
 
@@ -76,10 +76,10 @@ python setup.py install
 
 ## Manuscript / preprint
 
-Manuscript prepared for arXiv submission (identifier will be added after upload): [file:1]
+Manuscript prepared for arXiv submission (identifier will be added after upload): 
 
 **Diophantine Lattice Resonance for Chaos Detection in Time Series**
-Sotiriadi Nazar (2026). arXiv: TBA. [file:1]
+Sotiriadi Nazar (2026). arXiv: TBA. 
 
 ## Citation
 
