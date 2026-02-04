@@ -280,25 +280,7 @@ A system is flagged **CHAOS_CANDIDATE** if:
 
 ---
 
-## 6. Validation Summary
-
-**Benchmark accuracy (40 test cases):**
-- Logistic map (\( r=3.5 \) to \( r=4.0 \)): 100% correct (6/6)
-- Hénon attractor: 100% (2/2)
-- Lorenz system (\( \sigma=10, \rho=28, \beta=8/3 \)): 100% (3/3)
-- White/colored noise: 100% (4/4)
-- Financial data (S&P 500, GARCH): 100% (4/4)
-  - Returns → NOISE (efficient markets)
-  - Volatility → STRUCTURED (clustering)
-
-**Key robustness tests:**
-- Additive noise: Robust to SNR ≥ 5 dB
-- Sample size: Stable for \( n \geq 500 \); optimal \( n \geq 1000 \)
-- Normalization artifacts: Corrected via bias detection (phase mean \( < 0.20 \) override)
-
----
-
-## 7. Limitations and Assumptions
+## 6. Limitations and Assumptions
 
 1. **Univariate only:** Multivariate attractors require dimension-by-dimension analysis
 2. **Stationarity:** Assumes weak stationarity after detrending; regime shifts may violate this
@@ -309,7 +291,7 @@ A system is flagged **CHAOS_CANDIDATE** if:
 
 ---
 
-## 8. Software Requirements
+## 7. Software Requirements
 
 **Dependencies:**
 - Python ≥3.8
@@ -326,25 +308,6 @@ A system is flagged **CHAOS_CANDIDATE** if:
 - Fixed random seed (RNG_SEED=42) for reproducibility
 
 ---
-
-## 9. Future Directions
-
-1. **Multivariate extension:** Joint phase analysis across coupled variables
-2. **Adaptive thresholds:** Machine learning for bias/regularity gate calibration
-3. **Real-time streaming:** Incremental KS updates for online chaos detection
-4. **Regime decomposition:** Reintroduce GMM clustering (present in v6.1, removed from v7.1 core)
-5. **Theoretical proof:** Formalize conditions under which \( \Xi \) deviates from uniformity (see companion theorem)
-
----
-
-## 10. References
-
-1. Kolmogorov, A.N. (1933). *Sulla determinazione empirica di una legge di distribuzione.* Giornale dell'Istituto Italiano degli Attuari, 4, 83-91.
-2. Efron, B. (1979). *Bootstrap methods: Another look at the jackknife.* Annals of Statistics, 7(1), 1-26.
-3. Hardy, G.H. & Wright, E.M. (1979). *An Introduction to the Theory of Numbers* (5th ed.). Oxford University Press.
-4. Kantz, H. & Schreiber, T. (2004). *Nonlinear Time Series Analysis* (2nd ed.). Cambridge University Press.
-5. Bandt, C. & Pompe, B. (2002). *Permutation entropy: A natural complexity measure for time series.* Physical Review Letters, 88(17), 174102.
-6. Cont, R. (2001). *Empirical properties of asset returns: Stylized facts and statistical issues.* Quantitative Finance, 1, 223-236.
 
 ---
 
