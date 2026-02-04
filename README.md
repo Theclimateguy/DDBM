@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![arXiv](https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg)](https://arxiv.org/abs/XXXX.XXXXX) 
 
-archive link will be provided later with an article release - for now consult DDBM_Methodology.md
+arXiv link will be provided later with an article release - for now consult DDBM_Methodology.md
 
 **A statistical framework for distinguishing chaotic dynamics from periodic oscillations and noise in time series data.**
 
