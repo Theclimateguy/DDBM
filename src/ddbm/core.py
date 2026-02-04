@@ -142,6 +142,5 @@ def batch_analyze(data_dir, output_dir, pattern="*.csv", value_col=-1, config=No
     summary_file = output_dir / "batch_summary.csv"
     summary.to_csv(summary_file, index=False)
     
-    print(f"
-Saved summary: {summary_file}")
+    print(f"Saved summary: {summary_file}")
     return summary
