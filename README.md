@@ -2,96 +2,112 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![arXiv](https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg)](https://arxiv.org/abs/XXXX.XXXXX) 
+<!-- arXiv badge/link will be added after submission -->
 
-arXiv link will be provided later with an article release - for now consult DDBM_Methodology.md
+DDBM is a statistical method for distinguishing deterministic chaotic dynamics from periodic/quasi-periodic oscillations and noise in **univariate** time series, without phase-space reconstruction or training data. [file:1]
 
-**A statistical framework for distinguishing chaotic dynamics from periodic oscillations and noise in time series data.**
+Repository: https://github.com/Theclimateguy/DDBM [file:1]
 
-## Overview
+## Motivation
 
-DDBM detects deterministic chaos by analyzing non-uniform phase distributions in Diophantine residual space after quantization onto integer lattices. The method achieves **100% classification accuracy** on benchmark chaotic systems (logistic map, Hénon, Lorenz) and correctly identifies stylized facts in financial data.
+In climate science, finance, and other complex systems, a practical question precedes modeling: does the observed signal contain deterministic structure (potentially exploitable for prediction/control), or is it indistinguishable from a stochastic process after removing trends and linear dependence? [file:1]
 
-**Key Features:**
-- Two-level detection: raw signal + residualized dynamics
-- Automatic separation of chaos from periodic/limit-cycle behavior
-- Robust to trends, autocorrelation, and heteroscedasticity
-- No parameter tuning required (adaptive K-scan with hard gates)
-- Fast batch processing for multiple time series
+Common chaos diagnostics often require embedding choices, long sample sizes, or are sensitive to colored noise, motivating a conservative screening procedure that operates directly on scalar observables with formal hypothesis testing. [file:1]
 
-## Quick Start
+## Core idea (Diophantine lattice resonance)
+
+Chaotic attractors typically carry singular (fractal) invariant measures; when a scalar observable is rank-normalized to [0,1] and quantized onto an integer lattice, the trajectory occupies a sparse subset of bins at certain resolutions. [file:1]
+
+DDBM amplifies this sparsity by mapping quantized states through modular arithmetic, producing a “Diophantine phase” whose empirical distribution deviates from Uniform(0,1) for resonant quantization scales in deterministic chaos, while i.i.d. noise remains asymptotically equidistributed. [file:1]
+
+## Method (high level)
+
+Given a time series \(x_1,\dots,x_n\): [file:1]
+
+1) **Two-level preprocessing**
+- Level 1 (raw): rank/quantile normalization to \([0,1]\). [file:1]
+- Level 2 (residual): linear detrending, then AR(1) prewhitening; optionally standardize conditional volatility if ARCH effects are detected (Ljung–Box on squared residuals). [file:1]
+Classification requires structure detection at the residual level to reduce confounding by trends/linear dynamics. [file:1]
+
+2) **Lattice quantization**
+For \(K \in \{10,15,\dots,1000\}\), map \(u_t\in[0,1]\) to integers \(N_t=\lfloor Ku_t+0.5\rfloor\). [file:1]
+
+3) **Diophantine phase construction**
+Using the cubic kernel \(S_3(N)=3N^2+3N+1\) and a cubic residual built from \(N_t\) and \(\Delta N_t=N_{t+1}-N_t\), compute a normalized modular phase \(\Xi_t\in[0,1)\). [file:1]
+
+4) **Uniformity testing across K**
+Test \(H_0:\ \Xi_t \sim \mathrm{Uniform}(0,1)\) using a KS-based goodness-of-fit procedure with multiple-testing correction over the scanned \(K\) values; rejection implies “structured”. [file:1]
+
+5) **Regularity filter**
+After “structured” is detected, separate chaos vs regular dynamics using spectral concentration and autocorrelation persistence (plus a high permutation-entropy gate), yielding labels like CHAOS vs REGULAR; otherwise classify as NOISE/NOT-CHAOS-CANDIDATE. [file:1]
+
+## Validation (benchmark summary)
+
+On 40 benchmark systems spanning canonical chaotic attractors (Lorenz, Hénon, Rössler, Chua, logistic map), periodic/quasi-periodic dynamics, and stochastic processes (i.i.d. noise, AR, GARCH, random walk, plus financial data), the current report is **92.5% overall accuracy (37/40)**. [file:1]
+
+In that benchmark set, i.i.d. Gaussian white noise produced zero false positives, while observed misclassifications concentrate at boundary cases: quasi-periodic irrational rotations (circle map), very low SNR chaos+noise mixtures (~5 dB), and an IAAFT surrogate artifact. [file:1]
+
+## Quick start (API-style example)
 
 ```python
-import numpy as np
 from ddbm import analyze_timeseries
 
-# Generate chaotic logistic map
+# Logistic map (chaotic regime)
 x = [0.1]
 for _ in range(5000):
     x.append(4.0 * x[-1] * (1 - x[-1]))
 
-# Analyze
 result = analyze_timeseries(x)
-print(result['final_status'])  # → "CHAOS_CANDIDATE"
-print(result['chaos_candidate'])  # → True
+print(result["final_status"])
 ```
+
 
 ## Installation
 
+Clone and install locally:
+
 ```bash
-pip install numpy scipy pandas
-git clone https://github.com/yourusername/DDBM.git
+git clone https://github.com/Theclimateguy/DDBM.git
 cd DDBM
 python setup.py install
 ```
 
-Or directly from source:
-```bash
-pip install git+https://github.com/yourusername/DDBM.git
-```
+(If you publish a PyPI package later, add the `pip install ddbm` line here.) [file:2]
 
-## Documentation
+## Manuscript / preprint
 
-- **[API Reference](API.md)** – Function documentation
-- **[Usage Examples](examples/)** – Practical applications
-- **[Validation Report](VALIDATION.md)** – Benchmark results
+Manuscript prepared for arXiv submission (identifier will be added after upload): [file:1]
 
-## Scientific Background
-
-The mathematical foundation and theoretical proofs are detailed in our arXiv preprint:
-
-> **Diophantine Phase Detection for Time Series Classification**  
-> [Nazar Sotiriadi] (2026). arXiv:XXXX.XXXXX  
-> https://arxiv.org/abs/XXXX.XXXXX
-
-**Core principle:** Chaotic attractors with non-integer fractal dimension generate quantization artifacts that violate uniformity in modular arithmetic space.
+**Diophantine Lattice Resonance for Chaos Detection in Time Series**
+Sotiriadi Nazar (2026). arXiv: TBA. [file:1]
 
 ## Citation
 
-If you use DDBM in research, please cite:
-
 ```bibtex
 @misc{ddbm2026,
-  title={Diophantine Dynamical Boundary Method for Chaos Detection},
-  author={Nazar Sotiriadi},
+  title={Diophantine Lattice Resonance for Chaos Detection in Time Series},
+  author={Sotiriadi, Nazar},
   year={2026},
-  preprint={XXXX.XXXXX},
   archivePrefix={arXiv},
-  primaryClass={nlin.CD}
+  primaryClass={nlin.CD},
+  eprint={TBA}
 }
 ```
 
+
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+MIT License. See LICENSE for details. [file:2]
 
 ## Contact
 
-- Issues: [GitHub Issues](https://github.com/yourusername/DDBM/issues)
-- Email: n.sotiriadi@gmail.com
-- arXiv: https://arxiv.org/abs/XXXX.XXXXX
+- Issues: GitHub Issues
+- Email: n.sotiriadi@gmail.com [file:2]
 
 ---
 
-**Version:** 7.1  
-**Last updated:** February 2026
+Version: 7.1
+Last updated: February 2026 [file:2]
+
+```
+
