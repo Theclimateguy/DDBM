@@ -100,12 +100,11 @@ python setup.py install
 
 (If you publish a PyPI package later, add the `pip install ddbm` line here.) [file:2]
 
-## Manuscript / preprint
+## Article
 
-Manuscript prepared for arXiv submission (identifier will be added after upload): 
+Published record on Zenodo:
 
-**Diophantine Lattice Resonance for Chaos Detection in Time Series**
-Sotiriadi Nazar (2026). arXiv: TBA. 
+- https://zenodo.org/records/18753233
 
 ## Citation
 
@@ -114,9 +113,8 @@ Sotiriadi Nazar (2026). arXiv: TBA.
   title={Diophantine Lattice Resonance for Chaos Detection in Time Series},
   author={Sotiriadi, Nazar},
   year={2026},
-  archivePrefix={arXiv},
-  primaryClass={nlin.CD},
-  eprint={TBA}
+  howpublished={Zenodo},
+  url={https://zenodo.org/records/18753233}
 }
 ```
 
