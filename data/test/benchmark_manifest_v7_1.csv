@@ -1,0 +1,41 @@
+file,expected_label,group,include_in_paper,notes
+lorenz_x_rho28_N10000,Chaos,Chaotic Attractors,1,Lorenz x
+lorenz_y_rho28_N10000,Chaos,Chaotic Attractors,1,Lorenz y
+lorenz_z_rho28_N10000,Chaos,Chaotic Attractors,1,Lorenz z
+henon_x_a1.4_b0.3_N10000,Chaos,Chaotic Attractors,1,Henon x canonical
+henon_y_a1.4_b0.3_N10000,Chaos,Chaotic Attractors,1,Henon y canonical
+henon_x_a1.1_b0.3_N10000,Chaos,Chaotic Attractors,1,Henon weak chaos
+rossler_x_c5.7_N10000,Chaos,Chaotic Attractors,1,Rossler x chaotic
+chua_x_N10000,Chaos,Chaotic Attractors,1,Chua x canonical
+logistic_r3.70_N10000,Chaos,Chaotic Attractors,1,Logistic chaos
+logistic_r3.90_N10000,Chaos,Chaotic Attractors,1,Logistic chaos
+logistic_r4.00_N10000,Chaos,Chaotic Attractors,1,Logistic full chaos
+henon_x_a1.4_SNR10dB_N10000,Chaos,Chaotic Attractors,1,Henon chaos + noise 10dB
+henon_x_a1.4_SNR20dB_N10000,Chaos,Chaotic Attractors,1,Henon chaos + noise 20dB
+henon_x_a1.4_SNR5dB_N10000,Chaos,Chaotic Attractors,1,Henon chaos + noise 5dB
+sine_pure_N10000,Regular,Regular/Periodic,1,Pure sine
+quasi_sine_sum_N10000,Regular,Regular/Periodic,1,Incommensurate quasi-periodic sum
+logistic_r2.80_N10000,Regular,Regular/Periodic,1,Logistic fixed point
+logistic_r3.00_N10000,Regular,Regular/Periodic,1,Logistic period-2
+logistic_r3.50_N10000,Regular,Regular/Periodic,1,Logistic period-4
+logistic_r3.57_N10000,Regular,Regular/Periodic,1,Logistic onset
+henon_x_a1.3_b0.3_N10000,Regular,Regular/Periodic,1,Henon periodic
+rossler_x_c2.5_N10000,Regular,Regular/Periodic,1,Rossler limit cycle
+rossler_y_c5.7_N10000,Regular,Regular/Periodic,1,Rossler regular component
+lorenz_x_rho10_N10000,Regular,Regular/Periodic,1,Lorenz fixed point regime
+circle_map_quasiperiodic_N10000,Regular,Regular/Periodic,1,Circle map golden mean
+white_noise_1_N10000,Noise,Stochastic/Mixed,1,White noise seed 1
+white_noise_2_N10000,Noise,Stochastic/Mixed,1,White noise seed 2
+white_noise_3_N10000,Noise,Stochastic/Mixed,1,White noise seed 3
+ar1_phi0.3_N10000,Noise,Stochastic/Mixed,1,AR(1) low persistence
+ar1_phi0.7_N10000,Noise,Stochastic/Mixed,1,AR(1) medium persistence
+ar1_phi0.9_N10000,Noise,Stochastic/Mixed,1,AR(1) high persistence
+garch_returns,Noise,Stochastic/Mixed,1,GARCH returns
+garch_volatility,Noise,Stochastic/Mixed,1,GARCH volatility
+random_walk_N10000,Noise,Stochastic/Mixed,1,Random walk
+sp500_log_returns,Noise,Stochastic/Mixed,1,S&P500 returns
+sp500_volatility,Noise,Stochastic/Mixed,1,S&P500 realized volatility
+logistic_r4.00_SNR5dB_N10000,Mixed,Stochastic/Mixed,1,Logistic chaos + noise 5dB
+logistic_r4.00_SNR10dB_N10000,Mixed,Stochastic/Mixed,1,Logistic chaos + noise 10dB
+logistic_r4.00_SNR20dB_N10000,Mixed,Stochastic/Mixed,1,Logistic chaos + noise 20dB
+iaaft_surrogate_lorenz_x_N10000,Noise,Stochastic/Mixed,1,IAAFT surrogate
