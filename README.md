@@ -2,7 +2,7 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-<!-- arXiv badge/link will be added after submission -->
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18753233-blue)](https://doi.org/10.5281/zenodo.18753233)
 
 DDBM is a statistical method for distinguishing deterministic chaotic dynamics from periodic/quasi-periodic oscillations and noise in **univariate** time series, without phase-space reconstruction or training data.
 
