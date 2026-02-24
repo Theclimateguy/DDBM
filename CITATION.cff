@@ -1,19 +1,18 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
-  - family-names: "Your Last Name"
-    given-names: "Your First Name"
-    orcid: "https://orcid.org/0000-0000-0000-0000"
-title: "DDBM: Diophantine Dynamical Boundary Method"
-version: 7.1.0
-date-released: 2026-02-04
+  - family-names: "Sotiriadi"
+    given-names: "Nazar"
+    orcid: "https://orcid.org/0009-0006-1116-896X"
+title: "Diophantine Phase Detection for Time Series Classification"
+version: 7.2.0
+date-released: 2026-02-24
 url: "https://github.com/yourusername/DDBM"
 preferred-citation:
   type: article
   authors:
-    - family-names: "Your Last Name"
-      given-names: "Your First Name"
+    - family-names: "Sotiriadi"
+      given-names: "Nazar"
   title: "Diophantine Phase Detection for Time Series Classification"
   year: 2026
-  journal: "arXiv preprint"
-  url: "https://arxiv.org/abs/XXXX.XXXXX"
+  url: "https://doi.org/10.5281/zenodo.18753233"
