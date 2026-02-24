@@ -3,7 +3,6 @@ Preprocessing utilities: detrending, AR(1), volatility standardization
 """
 
 import numpy as np
-import pandas as pd
 from scipy import stats
 from scipy.stats import chi2
 
@@ -81,9 +80,15 @@ def rolling_vol_standardize(x, config):
     
     if n < win + 5:
         return x, dict(rollwin=int(win), roll_applied=False)
-    
-    s = pd.Series(x)
-    vol = s.rolling(win).std().to_numpy()
+
+    c1 = np.concatenate(([0.0], np.cumsum(x)))
+    c2 = np.concatenate(([0.0], np.cumsum(x * x)))
+    sum1 = c1[win:] - c1[:-win]
+    sum2 = c2[win:] - c2[:-win]
+    mean = sum1 / win
+    var = np.maximum(sum2 / win - mean * mean, 0.0)
+    vol = np.full(n, np.nan, dtype=float)
+    vol[win - 1 :] = np.sqrt(var)
     ok = np.isfinite(vol) & (vol > eps)
     y = x[ok] / vol[ok]
     

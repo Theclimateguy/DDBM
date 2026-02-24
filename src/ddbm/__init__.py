@@ -2,10 +2,10 @@
 DDBM: Diophantine Dynamical Boundary Method
 Statistical framework for chaos detection in time series
 
-Version 7.1
+Version 7.2
 """
 
-__version__ = "7.1.0"
+__version__ = "7.2.0"
 __author__ = "Your Name"
 
 from .core import analyze_timeseries, batch_analyze

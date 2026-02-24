@@ -1,6 +1,6 @@
 # API Reference
 
-**DDBM v7.1 Function Documentation**
+**DDBM v7.2 Function Documentation**
 
 ---
 
@@ -68,8 +68,8 @@ print(result['ddbm_resid']['optimal']['K_opt'])  # → optimal K
   Column index for time series data (negative = from end)
 
 **Returns:**
-- `summary` : pandas.DataFrame  
-  Aggregated results with columns:
+- `summary` : pandas.DataFrame or list[dict]  
+  Aggregated results with columns (DataFrame if pandas is installed):
   - `file`, `final_status`, `chaos_candidate`, `n_raw`, `n_resid`
   - `raw_K_opt`, `raw_D`, `raw_p_adj` (Level 1 optimal results)
   - `resid_K_opt`, `resid_D`, `resid_p_adj` (Level 2 optimal results)
@@ -210,7 +210,9 @@ result = analyze_timeseries(x, config=config)
 ```python
 {
   'final_status': str,  # "CHAOS_CANDIDATE" | "REGULAR_NONCHAOTIC" | etc.
+  'final_label': str,   # "Chaos" | "Regular" | "Noise" | "Degenerate"
   'chaos_candidate': bool,
+  'chaos_candidate_old': bool,  # Legacy structured-residual flag
   'n_points_raw': int,
   'n_points_resid': int,
 
@@ -258,8 +260,7 @@ result = analyze_timeseries(x, config=config)
 
 **Raised exceptions:**
 - `ValueError` : Input validation failures
-  - Series too short (< 500 points)
-  - All values NaN/Inf
+  - All values NaN/Inf or too few finite points for rank normalization
   - Invalid config parameters
 - `RuntimeError` : Computational failures
   - All K fail hard gates
@@ -284,12 +285,12 @@ except RuntimeError as e:
 **Required:**
 - numpy >= 1.20
 - scipy >= 1.7
-- pandas >= 1.3
 
 **Optional:**
+- pandas >= 1.3 (DataFrame output convenience in `batch_analyze`)
 - matplotlib (for visualization utilities)
 
 ---
 
-**Version:** 7.1  
+**Version:** 7.2  
 **Last updated:** February 2026

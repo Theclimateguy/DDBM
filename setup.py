@@ -6,17 +6,17 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name="ddbm",
-    version="7.1.0",
+    version="7.2.0",
     author="Your Name",
     author_email="your.email@domain.com",
     description="Diophantine Dynamical Boundary Method for chaos detection",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/DDBM",
+    url="https://github.com/Theclimateguy/DDBM",
     project_urls={
-        "Bug Tracker": "https://github.com/yourusername/DDBM/issues",
-        "Documentation": "https://github.com/yourusername/DDBM#documentation",
-        "Source Code": "https://github.com/yourusername/DDBM",
+        "Bug Tracker": "https://github.com/Theclimateguy/DDBM/issues",
+        "Documentation": "https://github.com/Theclimateguy/DDBM#readme",
+        "Source Code": "https://github.com/Theclimateguy/DDBM",
         "arXiv": "https://arxiv.org/abs/XXXX.XXXXX",
     },
     packages=find_packages(where="src"),
@@ -37,7 +37,6 @@ setup(
     install_requires=[
         "numpy>=1.20.0",
         "scipy>=1.7.0",
-        "pandas>=1.3.0",
     ],
     extras_require={
         "dev": [
@@ -48,11 +47,6 @@ setup(
         ],
         "viz": [
             "matplotlib>=3.4",
-        ],
-    },
-    entry_points={
-        "console_scripts": [
-            "ddbm-batch=ddbm.cli:batch_main",
         ],
     },
 )
