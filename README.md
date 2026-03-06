@@ -98,7 +98,7 @@ cd DDBM
 python setup.py install
 ```
 
-(If you publish a PyPI package later, add the `pip install ddbm` line here.) [file:2]
+(If you publish a PyPI package later, add the `pip install ddbm` line here.) 
 
 ## Article
 
@@ -121,12 +121,12 @@ Published record on Zenodo:
 
 ## License
 
-MIT License. See LICENSE for details. [file:2]
+MIT License. See LICENSE for details. 
 
 ## Contact
 
 - Issues: GitHub Issues
-- Email: n.sotiriadi@gmail.com [file:2]
+- Email: n.sotiriadi@gmail.com 
 
 ---
 
