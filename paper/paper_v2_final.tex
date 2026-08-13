@@ -1,0 +1,564 @@
+% DDBM v2 -- calibrated rank test. Single file, pdfLaTeX, Overleaf-ready.
+% Requires fig_mechanism.pdf alongside; comment out the figure if absent.
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage[hidelinks,breaklinks]{hyperref}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newcommand{\Xph}{\Xi}
+
+\title{\bfseries A Calibrated, Preprocessing-Free Rank Test for\\
+Deterministic Structure in Time Series:\\[4pt]
+\large Operation Order, Measured Surrogate Limits, and an Open Benchmark}
+
+\author{Nazar Sotiriadi\thanks{\texttt{n.sotiriadi@gmail.com}}}
+
+\date{Version 2 of Zenodo record
+\href{https://doi.org/10.5281/zenodo.18753233}{10.5281/zenodo.18753233}\\[2pt]
+\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Version~1 of this work proposed DDBM, a screening test that quantizes a
+rank-normalized scalar series onto an integer lattice, builds a modular phase
+from a cubic kernel, and reads departures from uniformity as evidence of
+deterministic structure. This version keeps the goal, discards most of the
+construction, and delivers what survives as a validated procedure.
+
+\emph{What we removed.} The cubic kernel turns out to be one member of a
+cyclotomic family: $S_p(N)=(N+1)^p-N^p$ factors into homogeneous cyclotomic
+polynomials at consecutive integers, so $(N{+}1)/N$ is an exact $p$-th root of
+unity modulo $S_p$ and the phase lattice has denominator $\Phi_n(1)$. The
+identity is correct and, to our knowledge, previously unstated in this context,
+but it buys nothing: because $\Xph$ is a deterministic function of the pair
+$(N_t,\Delta N_t)$, the phase map is a lossy projection, and a direct occupancy
+count on that pair scores $35/40$ against $34/40$ for the phases on our labeled
+benchmark. The modular arithmetic is discarded.
+
+\emph{What we found.} The order of operations decides whether the test is valid
+at all. Detrending, AR(1) prewhitening and volatility standardization applied
+\emph{before} rank normalization destroy distribution-freeness: empirical size
+at nominal $0.05$ reaches $0.19$ for a lognormal marginal and $0.85$ for a
+Cauchy marginal. Working on ranks alone restores exact distribution-freeness,
+with a one-line proof, and returns nominal size across six marginals. We also
+audit the surrogate stage, which is where every verdict ultimately rests: it
+rejects a static monotone transform of a linear process---inside its own
+null---in $25\%$ of replicates, and heteroscedastic processes in $50$--$75\%$.
+That measurement invalidates the financial conclusion of v1 and of our own
+earlier draft.
+
+\emph{What we recommend.} A preprocessing-free, rank-based test with exact
+Monte-Carlo calibration of the full scan, IAAFT confirmation, and documented
+confound controls. Under matched conditions the best discriminating statistic
+is the classical missing-ordinal-pattern count with the pattern length scaled to
+the sample ($37/40$); pair occupancy follows at $35/40$. We claim no new
+detection principle: the mechanism is the forbidden/missing-pattern paradigm and
+coarse-grained transition statistics. The contribution is the calibrated
+decision layer, the measured limits, and an open benchmark of 165 series whose
+synthetic labels are computed from Lyapunov exponents rather than asserted.
+\end{abstract}
+
+\section{What this version claims, and what it withdraws}
+
+Version~1 claimed a new detector: a modular-arithmetic phase statistic reaching
+$92.5\%$ accuracy on a 40-system benchmark, ``without phase-space
+reconstruction or training data''. Three of those claims do not survive scrutiny.
+
+\paragraph{The method is not embedding-free.} The phase $\Xph_t$ is a function of
+the pair $(N_t,N_{t+1})$, i.e.\ of a two-dimensional delay vector with $m=2$,
+$\tau=1$, quantized at resolution $1/K$. Scanning $K$ is a scan over box scale,
+and the count of realized pairs is a single-scale box count in that embedding.
+Embedding parameters were not eliminated; they were fixed and hidden. The
+statement in v1 is withdrawn.
+
+\paragraph{The stated mechanism contradicts the preprocessing.} Version~1
+attributed the signal to a singular marginal measure occupying few of $K$ bins.
+Rank normalization removes exactly that: for a continuous marginal and
+$n\gg K$, every bin receives about $n/K$ points regardless of how singular the
+underlying measure is. Whatever the test detects, it is not marginal sparsity;
+it is the geometry of \emph{transitions}. This reinterpretation is forced, and
+it is what the present version analyses.
+
+\paragraph{The $p$-values were not valid.} Phases from overlapping pairs are
+serially dependent, while the two-sample Kolmogorov--Smirnov test used to score
+them assumes independence; a Bonferroni correction over the scanned $K$ does not
+repair a miscalibrated individual test. Section~\ref{sec:pivot} shows the defect
+is worse than a dependence artifact: with the published order of operations the
+procedure is not even distribution-free.
+
+We also state plainly what is \emph{not} new. Discriminating determinism from
+noise by the occupancy of symbol transitions is classical: symbolic dynamics and
+forbidden words \cite{crutchfield}, the Bandt--Pompe ordinal
+symbolization~\cite{bandtpompe}, forbidden and missing ordinal
+patterns~\cite{amigo,zanin}, ordinal transition networks~\cite{mccullough}, and
+direct determinism tests~\cite{kaplanglass,sugihara}. The confound analysed in
+Section~\ref{sec:confounds} --- smooth stochastic processes imitating
+low-dimensional determinism --- has been known since \cite{theiler1986,osborne}.
+Nothing in this paper is a new detection principle.
+
+\section{The cyclotomic identity, and why it does not help}
+\label{sec:cyclo}
+
+\subsection{The identity}
+
+With $S_p(N)=(N+1)^p-N^p$ we have, by construction, $(N+1)^p\equiv N^p
+\pmod{S_p(N)}$.
+
+\begin{lemma}[order of the consecutive ratio]
+\label{lem:order}
+Let $N\ge 1$ and $p\ge 2$. Then $\gcd(N,S_p(N))=1$, and
+$\rho=(N+1)N^{-1}\bmod S_p(N)$ has multiplicative order exactly $p$.
+\end{lemma}
+
+\begin{proof}
+Expanding, $S_p(N)=\sum_{j<p}\binom{p}{j}N^{j}\equiv 1 \pmod N$, so $N$ is
+invertible. From $(N+1)^p\equiv N^p$ we get $\rho^{\,p}\equiv 1$, so the order
+divides $p$. If the order were $d<p$ with $d\mid p$, then $S_p(N)$ would divide
+$(N+1)^d-N^d$, which is a positive integer strictly smaller than $S_p(N)$ for
+$N\ge 1$ and $d<p$ --- impossible. Hence the order is $p$.
+\end{proof}
+
+\noindent
+The degenerate cell $N=0$ must be excluded: $S_p(0)=1$, the residue ring is
+trivial and $N^{-1}$ does not exist. Implementations should either drop that
+cell or map it to a fixed phase; v1 did neither.
+
+Expanding the difference of powers gives the homogeneous cyclotomic
+factorization
+\begin{equation}
+S_p(N)=\sum_{j=0}^{p-1}(N+1)^{j}N^{\,p-1-j}
+=\prod_{d\mid p,\ d>1}\Phi_d(N+1,\,N),
+\label{eq:cyclo}
+\end{equation}
+verified symbolically for $p=2,\dots,6$; e.g.\ $S_4=(2N{+}1)(2N^2{+}2N{+}1)
+=\Phi_2\Phi_4$ and $S_6=(2N{+}1)(N^2{+}N{+}1)(3N^2{+}3N{+}1)=\Phi_2\Phi_6\Phi_3$.
+Because the arguments are coprime, the classical primitive-divisor theory of
+Bang and Zsigmondy~\cite{zsigmondy} applies: every prime divisor $q$ of
+$\Phi_p(a,b)$ satisfies $q\equiv 1 \pmod p$ except possibly $q=p$. We verified
+no violations for $p\in\{3,5,7\}$, $N\in[2,200]$. Consequently $p$ divides
+$|(\mathbb{Z}/S_p)^\times|$ and an element of order $p$ must exist ---
+Lemma~\ref{lem:order} is not an accident of small cases.
+
+For $p=3$ the identity $3N^3=S_3(N)(N-1)+(2N+1)$ places the phases at
+$\Xph(N,0)=k/3+O(1/N)$ with $k$ determined by $N\bmod 3$; the median distance to
+$\{0,\tfrac13,\tfrac23\}$ is $2.2\times 10^{-4}$ over $N\in[2,2000]$. More
+generally the lattice denominator equals $\Phi_n(1)$, which is $p$ for
+$n=p^k$ and $1$ otherwise; measured denominators match for $n=2,\dots,12$.
+
+We emphasise the scope: this is proved for $\Delta N=0$, and for the special
+branch of the tent map where $\Delta N=N$ yields the exact resonance
+$\Xph=(N{+}1)/(2N{+}1)\to\tfrac12$. That an \emph{arbitrary} deterministic
+trajectory concentrates on the lattice more strongly than a stochastic one is an
+empirical observation (Fig.~\ref{fig:mech}), not a theorem.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_mechanism.pdf}
+\caption{Phase histograms against the i.i.d.\ null (top) and the atoms
+$\Xph$ against the lattice cell $N$ (bottom). Lorenz under the cubic kernel
+concentrates at $\{0,\frac13,\frac23\}$; the tent map under the quadratic kernel
+shows the exact resonance at $\frac12$; a pseudorandom hash on the same data
+retains the atom count but destroys the arithmetic positions.}
+\label{fig:mech}
+\end{figure}
+
+\subsection{Why the arithmetic is nevertheless discarded}
+
+$\Xph$ is a deterministic function of $(N_t,\Delta N_t)$. Any test on $\Xph$ is
+therefore majorized by a test on the pair itself: the phase map can only lose
+information. Empirically it does. Under a matched protocol
+(Section~\ref{sec:protocol}, preprocessing-free), a plain count of distinct
+realized pairs scores $35/40$ against $34/40$ for the calibrated cyclotomic
+phase scan, and the classical ordinal baseline scores $37/40$
+(Table~\ref{tab:compare}).
+
+An earlier draft of this version reported that cyclotomic kernels give
+``$5$--$8\times$ sharper'' $z$-scores than power kernels. That statement is
+withdrawn: the quoted values ($z\approx 750$ against a null simulated with a few
+hundred replicates) lie far outside the support of the simulated null and cannot
+be read as sensitivity. At matched nominal size the phase statistic is the
+\emph{least} sensitive of the three (Table~\ref{tab:classwise}).
+
+\section{Operation order decides validity}
+\label{sec:pivot}
+
+\subsection{The defect}
+
+The published pipeline applies OLS detrending, AR(1) prewhitening and (data
+dependent) rolling-volatility standardization to raw amplitudes, and ranks only
+afterwards. The ranks of the residual then depend on the unknown marginal $F$,
+so the calibration cannot be exact. We measured it: calibrate under a Gaussian
+null with $B=1000$ replicates at $n=10^4$, then test i.i.d.\ draws from six
+continuous marginals.
+
+\begin{table}[h]
+\centering
+\caption{Empirical size at nominal $\alpha=0.05$ of the screening stage,
+calibrated under a Gaussian null. ``KS'' tests the $p$-values against $U(0,1)$;
+$200$ series per cell.}
+\label{tab:pivot}
+\begin{tabular}{lrrrr}
+\toprule
+marginal & size@.05 & size@.10 & KS & $p_{\mathrm{KS}}$ \\
+\midrule
+Gaussian     & 0.045 & 0.090 & 0.047 & 0.757 \\
+uniform      & 0.045 & 0.080 & 0.081 & 0.134 \\
+Student $t_3$& 0.065 & 0.080 & 0.078 & 0.162 \\
+lognormal    & \textbf{0.190} & 0.245 & 0.237 & $<0.001$ \\
+exponential  & 0.065 & 0.110 & 0.107 & 0.018 \\
+Cauchy       & \textbf{0.880} & 0.885 & 0.840 & $<0.001$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+At nominal $5\%$ the test rejects i.i.d.\ Cauchy data $88\%$ of the time. The
+cause is straightforward: for a marginal without finite moments the fitted trend
+and the AR(1) coefficient are unstable, and their instability writes
+marginal-dependent structure into the ranks of the residual.
+
+\subsection{The remedy, and its proof}
+
+\begin{proposition}[distribution-freeness]
+\label{prop:pivot}
+Let $x_1,\dots,x_n$ be i.i.d.\ from any continuous distribution $F$, and let $T$
+be any statistic that depends on the sample only through the vector of ranks.
+Then the distribution of $T$ does not depend on $F$.
+\end{proposition}
+
+\begin{proof}
+Continuity gives distinct values almost surely, and the rank vector of an
+i.i.d.\ sample is uniform on the $n!$ permutations for every continuous $F$.
+A statistic measurable with respect to the rank vector therefore has a
+distribution determined by $n$ alone.
+\end{proof}
+
+\noindent
+The consequence is that the Monte-Carlo null is exact only if \emph{every}
+amplitude operation is removed or performed after ranking. We compared four
+orders empirically (Table~\ref{tab:orders}).
+
+\begin{table}[h]
+\centering
+\caption{Worst deviation of empirical size from the nominal $0.05$ across the six
+marginals of Table~\ref{tab:pivot}, for four orders of operations
+($150$ series per cell).}
+\label{tab:orders}
+\begin{tabular}{llr}
+\toprule
+variant & description & worst $|$size $-\,0.05|$ \\
+\midrule
+A & amplitude operations, then ranks (as published) & 0.803 \\
+B & ranks, then the same amplitude operations & 0.043 \\
+\textbf{C} & \textbf{ranks only, no amplitude operations} & \textbf{0.030} \\
+D & ranks, then differencing & 0.030 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+Only variant~C passes the uniformity test at every marginal. Its cost is that
+trends and linear autocorrelation are no longer removed before screening, so the
+surrogate stage must carry that load alone; Section~\ref{sec:results} shows it
+does so imperfectly (AR(1) with $\phi=0.9$ becomes a false positive for the pair
+statistic). We regard the trade as clear-cut nonetheless: a test whose size is
+$0.85$ on heavy tails is not usable, whereas a test that loses one hard case is.
+
+The preprocessing was in any case partly redundant. Removing a linear trend and
+linear autocorrelation is exactly what the surrogate stage tests for; performing
+it twice, once destructively, gains nothing.
+
+\section{The procedure we recommend}
+\label{sec:protocol}
+
+\begin{enumerate}[leftmargin=*,nosep]
+\item \textbf{Symbolize.} Rank-normalize to $[0,1]$ with average ranks for ties.
+No detrending, no prewhitening, no volatility scaling.
+\item \textbf{Screen.} Compute the statistic on a grid (lattice resolutions
+$K\in\{100,200,400,800\}$ for occupancy; pattern lengths $d$ with $d!$
+comparable to $n$ for ordinal patterns). Standardize each cell by a Monte-Carlo
+null and take the maximum; obtain
+$p=(1+\#\{T_{\text{null}}\ge T_{\text{obs}}\})/(1+B)$. The multiplicity of the
+scan is inside the simulated null, so no Bonferroni correction is applied.
+\item \textbf{Confirm.} If screening rejects, test against IAAFT
+surrogates~\cite{schreiber}, which reproduce the periodogram and the marginal to
+high but not exact numerical accuracy and therefore probe temporal ordering.
+\item \textbf{Classify.} Confirmed structure that is extremely narrowband
+(spectral concentration $>0.95$ or $|\mathrm{ACF}|>0.99$) is reported as
+\emph{(quasi-)periodic}; otherwise as \emph{confirmed nonlinear}, subdivided by
+transition occupancy into \emph{low-occupancy, compatible with low-dimensional
+determinism} and \emph{high-occupancy, nonlinear stochastic}. We deliberately
+avoid the label ``chaos'': no surrogate test can establish determinism
+(Section~\ref{sec:confounds}).
+\end{enumerate}
+
+\paragraph{Choosing the pattern length is not optional.} For $n=10^4$ the
+expected fraction of unobserved ordinal patterns under an i.i.d.\ null is
+$(1-1/d!)^{\,n-d+1}$: $0.0000$ for $d\le 6$, $0.138$ for $d=7$, $0.781$ for
+$d=8$, $0.973$ for $d=9$. At $d\le 6$ the statistic is identically zero under the
+null, its variance vanishes, and any standardized score is meaningless. We
+report this because an earlier draft of this paper used $d\in\{4,5,6\}$ at
+$n=10^4$ and obtained an apparently excellent baseline from a degenerate
+statistic. The trap is easy to fall into and, so far as we can see, is not
+flagged in the tooling.
+
+\section{Benchmark and results}
+\label{sec:results}
+
+\subsection{The benchmark}
+
+165 series with provenance; 46 carry ground-truth labels. Synthetic labels are
+\emph{computed}: maps by direct variational iteration, flows by Benettin
+renormalization on the ODE with the analytic Jacobian~\cite{benettin}, giving
+$\lambda=0.900$ (Lorenz, $\rho=28$), $0.083$ (R\"ossler, $c=5.7$), $0.425$ (Chua)
+and negative values for the regular regimes. Stochastic and mixed cases are
+labeled by construction, not by an exponent --- a distinction we now state
+explicitly, since ``detector-independent ground truth'' overstated it.
+
+Computing $\lambda$ corrected a label carried in the v1 manifest, and the
+correction is delicate. At $r=3.57$ the logistic map has
+$\lambda=0.01096$ with a bootstrap CI of $[0.0109,0.0111]$, so it is weakly
+chaotic rather than ``Regular''. But $r=3.57$ lies \emph{above} the Feigenbaum
+accumulation point $r_\infty=3.5699457$ (where $\lambda\approx 2\times10^{-5}$),
+and at $r=3.5705$ one finds $\lambda=-0.0039$: the parameter sits in a region
+riddled with periodic windows. We report the case as correctly labeled but
+hypersensitive, and all three statistics miss it.
+
+The 46 labeled series are not 46 independent systems: several are coordinates of
+one attractor or members of a parameter family. Accuracy figures should be read
+accordingly, and we report class-wise counts rather than a single number where
+possible.
+
+\subsection{Matched comparison}
+
+All three statistics were run through the identical protocol of
+Section~\ref{sec:protocol} --- same calibration, same surrogate stage, same
+decision rule, same auxiliary criteria. Only the discriminating statistic
+differs. Scoring is strict: the six \emph{Mixed} (chaos${+}$noise) cases are
+excluded rather than counted as correct under either label, a rule inherited
+from v1 that inflated the apparent score by six unloseable cases.
+
+\begin{table}[h]
+\centering
+\caption{Matched comparison, preprocessing-free, 40 labeled series, strict
+scoring. Size is the range of empirical size at nominal $0.05$ over the six
+marginals of Table~\ref{tab:pivot}.}
+\label{tab:compare}
+\begin{tabular}{lrl}
+\toprule
+statistic & accuracy & empirical size range \\
+\midrule
+missing ordinal patterns, $d\in\{6,7,8\}$ & \textbf{37/40 = 92.5\%} & 0.067--0.100 \\
+pair occupancy $(N_t,\Delta N_t)$        & 35/40 = 87.5\% & 0.033--0.092 \\
+cyclotomic phase scan                    & 34/40 = 85.0\% & 0.025--0.067 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Class-wise counts for the same runs. The phase statistic is the most
+conservative and the least sensitive; the ordinal statistic is mildly liberal
+and the most sensitive.}
+\label{tab:classwise}
+\begin{tabular}{lccc}
+\toprule
+& ordinal & occupancy & phases \\
+\midrule
+Chaos ($n=14$)   & 13/14 & 12/14 & 9/14 \\
+Regular ($n=10$) & 9/10  & 9/10  & 9/10 \\
+Noise ($n=16$)   & 15/16 & 14/16 & \textbf{16/16} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+Three cases are missed by every statistic: the logistic map at $r=3.57$, a sine
+at SNR ${\approx}10$\,dB whose label is debatable, and GARCH volatility
+(Section~\ref{sec:confounds}). The ordering in Table~\ref{tab:compare} is
+monotone in the amount of machinery: the classical baseline is best, the plain
+occupancy count second, the cyclotomic construction last. A gap of two cases in
+forty is not statistically decisive, and we do not claim the ordinal statistic is
+proven superior; we claim the phase construction is not shown to be superior,
+which given its cost is sufficient.
+
+\section{Measured limits}
+\label{sec:confounds}
+
+\subsection{The surrogate stage leaks}
+
+Every verdict rests on the surrogate stage, so its size must be measured rather
+than assumed. Table~\ref{tab:iaaft} gives rejection rates at nominal $0.05$.
+
+\begin{table}[h]
+\centering
+\caption{Rejection rate of the IAAFT confirmation stage. The first block lies
+inside the IAAFT null, where any rejection is a false positive. $8$ replicates
+per process.}
+\label{tab:iaaft}
+\begin{tabular}{lrr}
+\toprule
+process & screening $<.05$ & IAAFT $<.05$ \\
+\midrule
+white Gaussian; AR(1) $\phi=0.5,0.9$      & 0.00 & 0.00 \\
+sine ${+}$ noise; i.i.d.\ $t_3$           & 1.00 / 0.12 & 0.00 \\
+AR(2) oscillatory; ARMA(2,2); long memory & 1.00 & 0.12 \\
+cubed AR(1) (static monotone transform)   & 1.00 & \textbf{0.25} \\
+\midrule
+GARCH(1,1) returns                        & 0.50 & \textbf{0.50} \\
+stochastic volatility                     & 0.75 & \textbf{0.75} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+A static monotone transform of a linear Gaussian process is inside the null by
+construction, and is rejected in a quarter of replicates --- a known weakness of
+amplitude-adjusted surrogates~\cite{kugiumtzis,schreiber2000}, here quantified
+for this class of statistics. Heteroscedastic processes are rejected at
+$50$--$75\%$, which is the decisive number for applications.
+
+\subsection{Consequences for the applied claims}
+
+\paragraph{The financial conclusion is withdrawn.} Both v1 and our earlier draft
+read S\&P~500 log returns as carrying nonlinear structure. Given
+Table~\ref{tab:iaaft}, that reading is unsupported: heteroscedastic series are
+rejected by this stage at $50$--$75\%$ regardless of nonlinear dynamics, and
+returns are heavy-tailed, where Table~\ref{tab:pivot} shows the published
+pipeline was also miscalibrated. Testing financial returns requires a
+model-based null (constrained GARCH surrogates), which we have not run. The
+correct present statement is that the test is uninformative for this class.
+
+\paragraph{The climate conclusion is softened.} Daily HadCET anomalies, monthly
+Ni\~no3.4, PDO and AMO show no evidence of low-dimensional determinism
+\emph{within this test}, consistent with a stochastic climate
+model~\cite{hasselmann} and with the resolution of the 1980s attractor
+controversy~\cite{nicolis,grassbergerclimate}. Absence of detection is not
+evidence of absence. The methodological point stands independently: screening
+alone flags most climate series as ``structured'', so a pipeline without the
+surrogate stage would reproduce the error of that era.
+
+\paragraph{The EEG gradient is confounded.} On the Bonn data~\cite{andrzejak} the
+confirmed-nonlinear rate rises monotonically across classes ($1/20$, $0/20$,
+$1/20$, $4/20$, $17/20$ from healthy to ictal). But classes A/B are scalp
+recordings and C/D/E are intracranial, differing in modality and amplitude
+resolution; the gradient tracks that as well as clinical severity. No clinical
+claim is made.
+
+\subsection{Confounds inherent to the approach}
+
+\emph{Nonlinearity is not determinism.} GARCH volatility is nonlinear (the
+surrogate stage correctly rejects) and smooth (transition occupancy $0.41$,
+inside the deterministic range), so it is misclassified. A random walk sits at
+$0.17$. This is the effect described in \cite{theiler1986,osborne} and it is a
+limit of surrogate methodology, not a threshold to be tuned.
+
+\emph{Instrumental quantization manufactures the signal.} RR intervals at
+$128$\,Hz carry $50$--$79$ distinct values in $10^4$ points; coarse digitization
+creates transition sparsity for free. Referencing the occupancy statistic
+against a random permutation of the \emph{same values} cancels the value
+multiset exactly and largely removes the artifact ($0.04$--$0.09$ before,
+$0.26$--$0.63$ after). We report a low-resolution flag and decline to interpret
+the HRV verdicts physiologically.
+
+\emph{Densely sampled flows.} Most structure of a smooth oversampled flow lives
+in the spectrum, which IAAFT reproduces, so the surrogate stage has little
+power. Reducing the flow to successive local maxima repairs this on our six
+flows, including the two that fail on the raw series. We flag this as an
+in-sample result: the reduction was devised on the cases that motivated it and
+has not been validated out of sample.
+
+\section{What is new, what is not, and what remains}
+
+\paragraph{Not new.} The detection principle: transition occupancy and
+forbidden/missing patterns in symbolic dynamics
+\cite{crutchfield,bandtpompe,amigo,mccullough,zanin}. The mathematics: the
+cyclotomic factorization, the order of an element, and the primitive-divisor
+congruence are classical~\cite{zsigmondy}. The smooth-stochastic confound
+\cite{theiler1986,osborne}. Surrogate methodology~\cite{theiler1992,schreiber}.
+
+\paragraph{New, as far as we can determine.}
+(i)~The cyclotomic identification of the phase lattice, Eq.~\eqref{eq:cyclo} with
+Lemma~\ref{lem:order} --- correct, and negative in consequence.
+(ii)~The demonstration that operation order determines distribution-freeness for
+this family of tests, with measured sizes up to $0.85$ and a remedy
+(Proposition~\ref{prop:pivot}, Table~\ref{tab:orders}).
+(iii)~Measured empirical sizes for three symbolic statistics across six
+marginals, and a size audit of the IAAFT stage for this class
+(Table~\ref{tab:iaaft}).
+(iv)~The saturation trap in specifying the ordinal baseline at fixed $n$.
+(v)~An open benchmark with computed rather than asserted synthetic labels.
+
+\paragraph{Useful, and missing from current tooling.} Widely used packages supply
+these statistics but not the inference around them: \texttt{ordpy}~\cite{ordpy}
+computes permutation entropy, complexity--entropy planes, missing patterns and
+ordinal networks, and provides no hypothesis test, no $p$-values, no surrogate
+framework and no null calibration; surrogate generators exist separately and are
+not wired to the statistics. The ordinal literature itself notes that raw
+missing-pattern counts cannot be thresholded by inspection, since they arise from
+correlated stochastic processes as well as from
+determinism~\cite{zanin}. The gap is a decision layer, and that is what this
+paper supplies and validates.
+
+\paragraph{Not done.} Power curves over $n$ and SNR at fixed size, instead of
+accuracy at a single $\alpha$; a frozen protocol evaluated on a held-out set of
+generators (the thresholds and the kernel choice here were selected on the same
+46 series); model-based surrogates for heteroscedastic data; out-of-sample
+validation of the return-map reduction; several realizations per system with
+cluster-aware uncertainty. These are the experiments we would require of this
+paper as referees, and we flag their absence rather than work around it.
+
+\section{Conclusion}
+
+The construction proposed in v1 does not survive: it is a lossy projection of a
+pair statistic that is itself a rediscovery of a classical mechanism, and at
+matched nominal size it is the weakest of the three statistics we compared. The
+cubic kernel has an exact cyclotomic explanation, which is satisfying and
+useless.
+
+What survives is a procedure and three measurements. Rank-only symbolization
+makes the test exactly distribution-free, which the published pipeline was not;
+the surrogate stage that carries every verdict leaks at rates we now quantify;
+and the choice of pattern length silently destroys the standard baseline at
+common sample sizes. Together with an open benchmark whose synthetic labels are
+computed, these make a working, honestly bounded screening procedure --- which is
+less than v1 claimed, and more than it delivered.
+
+\section*{Reproducibility}
+
+Code, benchmark manifest and results are in the \texttt{v2} branch of the
+project repository,
+\url{https://github.com/Theclimateguy/DDBM/tree/v2}: \texttt{build\_dataset.py}
+regenerates or downloads all series; \texttt{rank\_only\_pair.py} and
+\texttt{ordinal\_scaled.py} reproduce Tables~\ref{tab:compare}
+and~\ref{tab:classwise}; \texttt{pivotality\_fix.py} reproduces
+Table~\ref{tab:orders}; \texttt{reviewer\_experiments.py} reproduces
+Tables~\ref{tab:pivot} and~\ref{tab:iaaft} and the Lyapunov intervals;
+\texttt{cyclotomic\_kernels.py} the symbolic derivations. Seeds are fixed;
+series files are not redistributed and are rebuilt from primary sources.
+
+\section*{Acknowledgements}
+
+Two independent referee reports on the v1 and draft-v2 manuscripts identified the
+embedding claim, the pivotality gap, the unvalidated surrogate stage, the
+scoring rule and the baseline specification. Sections~\ref{sec:pivot}
+and~\ref{sec:confounds} exist because of them.
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}

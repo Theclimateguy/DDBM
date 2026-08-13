@@ -1,18 +1,30 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
+message: "If you use this software or benchmark, please cite it as below."
 authors:
   - family-names: "Sotiriadi"
     given-names: "Nazar"
     orcid: "https://orcid.org/0009-0006-1116-896X"
-title: "Diophantine Phase Detection for Time Series Classification"
-version: 7.2.0
-date-released: 2026-02-24
-url: "https://github.com/yourusername/DDBM"
+title: "A calibrated, preprocessing-free rank test for deterministic structure in time series"
+version: 2.0.0
+date-released: 2026-08-06
+url: "https://github.com/Theclimateguy/DDBM/tree/v2"
+repository-code: "https://github.com/Theclimateguy/DDBM"
+license: MIT
 preferred-citation:
   type: article
   authors:
     - family-names: "Sotiriadi"
       given-names: "Nazar"
-  title: "Diophantine Phase Detection for Time Series Classification"
+  title: "A Calibrated, Preprocessing-Free Rank Test for Deterministic Structure in Time Series: Operation Order, Measured Surrogate Limits, and an Open Benchmark"
   year: 2026
+  notes: "Version 2. Supersedes the version 1 preprint; the detector claim of v1 is withdrawn."
   url: "https://doi.org/10.5281/zenodo.18753233"
+references:
+  - type: article
+    authors:
+      - family-names: "Sotiriadi"
+        given-names: "Nazar"
+    title: "Seeking Structural Patterns in Time Series with Diophantine Approximations"
+    year: 2026
+    doi: "10.5281/zenodo.18753233"
+    notes: "Version 1, superseded."

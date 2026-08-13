@@ -1,0 +1,19 @@
+# transient
+__pycache__/
+*.pyc
+*.log
+
+# regenerated or downloaded data (see v2/build_dataset.py)
+v2/data_bench/series/
+v2/data_bench/raw/
+results_test/
+
+# LaTeX build products (paper_v2_final.pdf is committed deliberately)
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.out
+paper/*.toc
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz

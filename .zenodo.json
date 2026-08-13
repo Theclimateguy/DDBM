@@ -1,0 +1,43 @@
+{
+  "title": "A Calibrated, Preprocessing-Free Rank Test for Deterministic Structure in Time Series: Operation Order, Measured Surrogate Limits, and an Open Benchmark",
+  "version": "v2",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "description": "<p>Version 2 of the DDBM work. The v1 detector claim is withdrawn and replaced by a validated procedure.</p><p><strong>What is removed.</strong> The method is not embedding-free: the modular phase is a function of the delay pair (N_t, N_{t+1}) at m = 2, tau = 1, quantized at 1/K, and scanning K scans box scale. The stated mechanism of v1 &mdash; a singular marginal measure occupying few bins &mdash; is destroyed by the method's own rank normalization; what the test sees is the geometry of transitions. The cubic kernel has an exact cyclotomic explanation: S_p(N) = (N+1)^p &minus; N^p factors into homogeneous cyclotomic polynomials evaluated at consecutive integers, so (N+1)/N is an exact p-th root of unity modulo S_p and the phase lattice has denominator Phi_n(1). The identity is correct but useless: the phase map is a lossy projection of the pair, and a plain occupancy count on that pair outperforms it.</p><p><strong>What is new.</strong> The order of operations determines validity. Detrending, AR(1) prewhitening and volatility standardization applied before rank normalization destroy distribution-freeness, with empirical size at nominal 0.05 reaching 0.19 for a lognormal marginal and 0.85 for a Cauchy marginal; working on ranks alone restores it, with a one-line proof, and returns nominal size across six marginals. The IAAFT confirmation stage, on which every verdict rests, is audited and leaks: 25% rejection on a static monotone transform of a linear process (inside its own null) and 50&ndash;75% on heteroscedastic processes, which invalidates the financial conclusion of v1. A baseline-specification trap is documented: at n = 10^4 the missing-ordinal-pattern statistic is identically zero under the null for pattern lengths d &le; 6, so any standardized score computed there is meaningless.</p><p><strong>What is recommended.</strong> A preprocessing-free, rank-based test with exact Monte-Carlo calibration of the full scan, IAAFT confirmation and documented confound controls. Under matched conditions the best discriminating statistic is the classical missing-ordinal-pattern count with the pattern length scaled to the sample (37/40); pair occupancy follows (35/40); the cyclotomic phase scan is last (34/40). No new detection principle is claimed &mdash; the mechanism is the forbidden/missing-pattern paradigm and coarse-grained transition statistics. The contribution is the calibrated decision layer, the measured limits, and an open benchmark of 165 series whose synthetic labels are computed from Lyapunov exponents rather than asserted.</p>",
+  "creators": [
+    {
+      "name": "Sotiriadi, Nazar",
+      "orcid": "0009-0006-1116-896X"
+    }
+  ],
+  "keywords": [
+    "time series analysis",
+    "deterministic structure",
+    "surrogate data",
+    "ordinal patterns",
+    "distribution-free inference",
+    "Monte-Carlo calibration",
+    "cyclotomic polynomials",
+    "negative results",
+    "reproducibility",
+    "benchmark"
+  ],
+  "license": "cc-by-4.0",
+  "access_right": "open",
+  "language": "eng",
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.18753233",
+      "relation": "isNewVersionOf",
+      "resource_type": "publication-preprint",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "https://github.com/Theclimateguy/DDBM/tree/v2",
+      "relation": "isSupplementedBy",
+      "resource_type": "software",
+      "scheme": "url"
+    }
+  ],
+  "notes": "Version 2 supersedes version 1; the detector claim of v1 is withdrawn. Code, benchmark manifest and result tables are in the v2 branch of the linked repository."
+}

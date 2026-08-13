@@ -1,0 +1,166 @@
+name,label,group,n,source,note
+logistic_r2.80,Regular,map,10000,synthetic,lyap=-0.2231
+logistic_r3.00,Regular,map,10000,synthetic,lyap=-0.0000
+logistic_r3.50,Regular,map,10000,synthetic,lyap=-0.8725
+logistic_r3.57,Chaos,map,10000,synthetic,lyap=0.0109
+logistic_r3.70,Chaos,map,10000,synthetic,lyap=0.3557
+logistic_r3.90,Chaos,map,10000,synthetic,lyap=0.4964
+logistic_r4.00,Chaos,map,10000,synthetic,lyap=0.6931
+henon_x_a1.4,Chaos,map,10000,synthetic,lyap=0.4209
+henon_y_a1.4,Chaos,map,10000,synthetic,lyap=0.4209
+henon_x_a1.1,Chaos,map,10000,synthetic,lyap=0.1792
+henon_x_a1.3,Regular,map,10000,synthetic,lyap=-0.2375
+lorenz_x_rho28,Chaos,flow,10000,synthetic,lyap=0.8999
+lorenz_y_rho28,Chaos,flow,10000,synthetic,lyap=0.8999
+lorenz_z_rho28,Chaos,flow,10000,synthetic,lyap=0.8999
+lorenz_x_rho10,Regular,flow,10000,synthetic,lyap=-0.5946
+rossler_x_c5.7,Chaos,flow,10000,synthetic,lyap=0.0830
+rossler_y_c5.7,Chaos,flow,10000,synthetic,lyap=0.0830
+rossler_x_c2.5,Regular,flow,10000,synthetic,lyap=-0.0112
+chua_x,Chaos,flow,10000,synthetic,lyap=0.4252
+chua_y,Chaos,flow,10000,synthetic,lyap=0.4252
+white_noise_1,Noise,stochastic,10000,synthetic,
+white_noise_2,Noise,stochastic,10000,synthetic,
+white_noise_3,Noise,stochastic,10000,synthetic,
+white_uniform,Noise,stochastic,10000,synthetic,
+student_t3,Noise,stochastic,10000,synthetic,
+ar1_phi0.3,Noise,stochastic,10000,synthetic,
+ar1_phi0.7,Noise,stochastic,10000,synthetic,
+ar1_phi0.9,Noise,stochastic,10000,synthetic,
+arma22,Noise,stochastic,10000,synthetic,
+random_walk,Noise,stochastic,10000,synthetic,
+garch_returns,Noise,stochastic,10000,synthetic,
+garch_volatility,Noise,stochastic,10000,synthetic,
+fgn_h0.8,Noise,stochastic,10000,synthetic,approx long-memory
+sine_pure,Regular,periodic,10000,synthetic,
+sine_plus_noise,Regular,periodic,10000,synthetic,
+quasi_sine_sum,Regular,periodic,10000,synthetic,
+circle_map_qp,Regular,periodic,10000,synthetic,
+henon_SNR5dB,Mixed,mixed,10000,synthetic,
+logistic_SNR5dB,Mixed,mixed,10000,synthetic,
+henon_SNR10dB,Mixed,mixed,10000,synthetic,
+logistic_SNR10dB,Mixed,mixed,10000,synthetic,
+henon_SNR20dB,Mixed,mixed,10000,synthetic,
+logistic_SNR20dB,Mixed,mixed,10000,synthetic,
+iaaft_lorenz_x,Noise,surrogate,10000,synthetic,
+iaaft_henon_x,Noise,surrogate,10000,synthetic,
+shuffle_lorenz_x,Noise,surrogate,10000,synthetic,
+sp500_log_returns_full,unknown,finance,14268,Yahoo ^GSPC 1970-01-02..2026-08-05,efficient-market prior: Noise
+sp500_log_returns_2010_2024,unknown,finance,3773,Yahoo ^GSPC 2010-2024,matches original DDBM paper window
+sp500_realized_vol,unknown,finance,14246,Yahoo ^GSPC 22d rolling std,
+cet_daily_raw,unknown,climate,91431,HadCET 1772-2022 daily,
+cet_daily_anomaly,unknown,climate,91431,"HadCET daily, seasonal cycle removed",Hasselmann prior: Noise
+nao_daily,unknown,climate,27969,NOAA CPC daily NAO 1950-2026,
+nino34_monthly,unknown,climate,918,NOAA PSL nina34_monthly.txt,n<1000: low power
+pdo_monthly,unknown,climate,936,NOAA PSL pdo_monthly.txt,n<1000: low power
+amo_monthly,unknown,climate,901,NOAA PSL amo_monthly.txt,n<1000: low power
+rr_chf201,unknown,physiology,112118,PhysioNet chf2db chf201,HRV CHF
+rr_chf202,unknown,physiology,108994,PhysioNet chf2db chf202,HRV CHF
+rr_chf203,unknown,physiology,98455,PhysioNet chf2db chf203,HRV CHF
+rr_chf204,unknown,physiology,95991,PhysioNet chf2db chf204,HRV CHF
+rr_chf205,unknown,physiology,132920,PhysioNet chf2db chf205,HRV CHF
+rr_nsr001,unknown,physiology,106374,PhysioNet nsr2db nsr001,HRV healthy
+rr_nsr002,unknown,physiology,111093,PhysioNet nsr2db nsr002,HRV healthy
+rr_nsr003,unknown,physiology,97154,PhysioNet nsr2db nsr003,HRV healthy
+rr_nsr004,unknown,physiology,97775,PhysioNet nsr2db nsr004,HRV healthy
+rr_nsr005,unknown,physiology,116170,PhysioNet nsr2db nsr005,HRV healthy
+eeg_setA_00,unknown,eeg,4097,Bonn setA Z001.txt,healthy_eyes_open
+eeg_setA_01,unknown,eeg,4097,Bonn setA Z002.txt,healthy_eyes_open
+eeg_setA_02,unknown,eeg,4097,Bonn setA Z003.txt,healthy_eyes_open
+eeg_setA_03,unknown,eeg,4097,Bonn setA Z004.txt,healthy_eyes_open
+eeg_setA_04,unknown,eeg,4097,Bonn setA Z005.txt,healthy_eyes_open
+eeg_setA_05,unknown,eeg,4097,Bonn setA Z006.txt,healthy_eyes_open
+eeg_setA_06,unknown,eeg,4097,Bonn setA Z007.txt,healthy_eyes_open
+eeg_setA_07,unknown,eeg,4097,Bonn setA Z008.txt,healthy_eyes_open
+eeg_setA_08,unknown,eeg,4097,Bonn setA Z009.txt,healthy_eyes_open
+eeg_setA_09,unknown,eeg,4097,Bonn setA Z010.txt,healthy_eyes_open
+eeg_setA_10,unknown,eeg,4097,Bonn setA Z011.txt,healthy_eyes_open
+eeg_setA_11,unknown,eeg,4097,Bonn setA Z012.txt,healthy_eyes_open
+eeg_setA_12,unknown,eeg,4097,Bonn setA Z013.txt,healthy_eyes_open
+eeg_setA_13,unknown,eeg,4097,Bonn setA Z014.txt,healthy_eyes_open
+eeg_setA_14,unknown,eeg,4097,Bonn setA Z015.txt,healthy_eyes_open
+eeg_setA_15,unknown,eeg,4097,Bonn setA Z016.txt,healthy_eyes_open
+eeg_setA_16,unknown,eeg,4097,Bonn setA Z017.txt,healthy_eyes_open
+eeg_setA_17,unknown,eeg,4097,Bonn setA Z018.txt,healthy_eyes_open
+eeg_setA_18,unknown,eeg,4097,Bonn setA Z019.txt,healthy_eyes_open
+eeg_setA_19,unknown,eeg,4097,Bonn setA Z020.txt,healthy_eyes_open
+eeg_setB_00,unknown,eeg,4097,Bonn setB O001.txt,healthy_eyes_closed
+eeg_setB_01,unknown,eeg,4097,Bonn setB O002.txt,healthy_eyes_closed
+eeg_setB_02,unknown,eeg,4097,Bonn setB O003.txt,healthy_eyes_closed
+eeg_setB_03,unknown,eeg,4097,Bonn setB O004.txt,healthy_eyes_closed
+eeg_setB_04,unknown,eeg,4097,Bonn setB O005.txt,healthy_eyes_closed
+eeg_setB_05,unknown,eeg,4097,Bonn setB O006.txt,healthy_eyes_closed
+eeg_setB_06,unknown,eeg,4097,Bonn setB O007.txt,healthy_eyes_closed
+eeg_setB_07,unknown,eeg,4097,Bonn setB O008.txt,healthy_eyes_closed
+eeg_setB_08,unknown,eeg,4097,Bonn setB O009.txt,healthy_eyes_closed
+eeg_setB_09,unknown,eeg,4097,Bonn setB O010.txt,healthy_eyes_closed
+eeg_setB_10,unknown,eeg,4097,Bonn setB O011.txt,healthy_eyes_closed
+eeg_setB_11,unknown,eeg,4097,Bonn setB O012.txt,healthy_eyes_closed
+eeg_setB_12,unknown,eeg,4097,Bonn setB O013.txt,healthy_eyes_closed
+eeg_setB_13,unknown,eeg,4097,Bonn setB O014.txt,healthy_eyes_closed
+eeg_setB_14,unknown,eeg,4097,Bonn setB O015.txt,healthy_eyes_closed
+eeg_setB_15,unknown,eeg,4097,Bonn setB O016.txt,healthy_eyes_closed
+eeg_setB_16,unknown,eeg,4097,Bonn setB O017.txt,healthy_eyes_closed
+eeg_setB_17,unknown,eeg,4097,Bonn setB O018.txt,healthy_eyes_closed
+eeg_setB_18,unknown,eeg,4097,Bonn setB O019.txt,healthy_eyes_closed
+eeg_setB_19,unknown,eeg,4097,Bonn setB O020.txt,healthy_eyes_closed
+eeg_setC_00,unknown,eeg,4097,Bonn setC N001.TXT,interictal_opposite
+eeg_setC_01,unknown,eeg,4097,Bonn setC N002.TXT,interictal_opposite
+eeg_setC_02,unknown,eeg,4097,Bonn setC N003.TXT,interictal_opposite
+eeg_setC_03,unknown,eeg,4097,Bonn setC N004.TXT,interictal_opposite
+eeg_setC_04,unknown,eeg,4097,Bonn setC N005.TXT,interictal_opposite
+eeg_setC_05,unknown,eeg,4097,Bonn setC N006.TXT,interictal_opposite
+eeg_setC_06,unknown,eeg,4097,Bonn setC N007.TXT,interictal_opposite
+eeg_setC_07,unknown,eeg,4097,Bonn setC N008.TXT,interictal_opposite
+eeg_setC_08,unknown,eeg,4097,Bonn setC N009.TXT,interictal_opposite
+eeg_setC_09,unknown,eeg,4097,Bonn setC N010.TXT,interictal_opposite
+eeg_setC_10,unknown,eeg,4097,Bonn setC N011.TXT,interictal_opposite
+eeg_setC_11,unknown,eeg,4097,Bonn setC N012.TXT,interictal_opposite
+eeg_setC_12,unknown,eeg,4097,Bonn setC N013.TXT,interictal_opposite
+eeg_setC_13,unknown,eeg,4097,Bonn setC N014.TXT,interictal_opposite
+eeg_setC_14,unknown,eeg,4097,Bonn setC N015.TXT,interictal_opposite
+eeg_setC_15,unknown,eeg,4097,Bonn setC N016.TXT,interictal_opposite
+eeg_setC_16,unknown,eeg,4097,Bonn setC N017.TXT,interictal_opposite
+eeg_setC_17,unknown,eeg,4097,Bonn setC N018.TXT,interictal_opposite
+eeg_setC_18,unknown,eeg,4097,Bonn setC N019.TXT,interictal_opposite
+eeg_setC_19,unknown,eeg,4097,Bonn setC N020.TXT,interictal_opposite
+eeg_setD_00,unknown,eeg,4097,Bonn setD F001.txt,interictal_focus
+eeg_setD_01,unknown,eeg,4097,Bonn setD F002.txt,interictal_focus
+eeg_setD_02,unknown,eeg,4097,Bonn setD F003.txt,interictal_focus
+eeg_setD_03,unknown,eeg,4097,Bonn setD F004.txt,interictal_focus
+eeg_setD_04,unknown,eeg,4097,Bonn setD F005.txt,interictal_focus
+eeg_setD_05,unknown,eeg,4097,Bonn setD F006.txt,interictal_focus
+eeg_setD_06,unknown,eeg,4097,Bonn setD F007.txt,interictal_focus
+eeg_setD_07,unknown,eeg,4097,Bonn setD F008.txt,interictal_focus
+eeg_setD_08,unknown,eeg,4097,Bonn setD F009.txt,interictal_focus
+eeg_setD_09,unknown,eeg,4097,Bonn setD F010.txt,interictal_focus
+eeg_setD_10,unknown,eeg,4097,Bonn setD F011.txt,interictal_focus
+eeg_setD_11,unknown,eeg,4097,Bonn setD F012.txt,interictal_focus
+eeg_setD_12,unknown,eeg,4097,Bonn setD F013.txt,interictal_focus
+eeg_setD_13,unknown,eeg,4097,Bonn setD F014.txt,interictal_focus
+eeg_setD_14,unknown,eeg,4097,Bonn setD F015.txt,interictal_focus
+eeg_setD_15,unknown,eeg,4097,Bonn setD F016.txt,interictal_focus
+eeg_setD_16,unknown,eeg,4097,Bonn setD F017.txt,interictal_focus
+eeg_setD_17,unknown,eeg,4097,Bonn setD F018.txt,interictal_focus
+eeg_setD_18,unknown,eeg,4097,Bonn setD F019.txt,interictal_focus
+eeg_setD_19,unknown,eeg,4097,Bonn setD F020.txt,interictal_focus
+eeg_setE_00,unknown,eeg,4097,Bonn setE S001.txt,seizure
+eeg_setE_01,unknown,eeg,4097,Bonn setE S002.txt,seizure
+eeg_setE_02,unknown,eeg,4097,Bonn setE S003.txt,seizure
+eeg_setE_03,unknown,eeg,4097,Bonn setE S004.txt,seizure
+eeg_setE_04,unknown,eeg,4097,Bonn setE S005.txt,seizure
+eeg_setE_05,unknown,eeg,4097,Bonn setE S006.txt,seizure
+eeg_setE_06,unknown,eeg,4097,Bonn setE S007.txt,seizure
+eeg_setE_07,unknown,eeg,4097,Bonn setE S008.txt,seizure
+eeg_setE_08,unknown,eeg,4097,Bonn setE S009.txt,seizure
+eeg_setE_09,unknown,eeg,4097,Bonn setE S010.txt,seizure
+eeg_setE_10,unknown,eeg,4097,Bonn setE S011.txt,seizure
+eeg_setE_11,unknown,eeg,4097,Bonn setE S012.txt,seizure
+eeg_setE_12,unknown,eeg,4097,Bonn setE S013.txt,seizure
+eeg_setE_13,unknown,eeg,4097,Bonn setE S014.txt,seizure
+eeg_setE_14,unknown,eeg,4097,Bonn setE S015.txt,seizure
+eeg_setE_15,unknown,eeg,4097,Bonn setE S016.txt,seizure
+eeg_setE_16,unknown,eeg,4097,Bonn setE S017.txt,seizure
+eeg_setE_17,unknown,eeg,4097,Bonn setE S018.txt,seizure
+eeg_setE_18,unknown,eeg,4097,Bonn setE S019.txt,seizure
+eeg_setE_19,unknown,eeg,4097,Bonn setE S020.txt,seizure

@@ -1,5 +1,27 @@
 # DDBM: Diophantine Dynamical Boundary Method
 
+> ### ⚠️ Superseded by v2 — the detector claim below is withdrawn
+>
+> Version 2 ([`v2` branch](https://github.com/Theclimateguy/DDBM/tree/v2)) found that
+> (a) the method is **not** embedding-free — the phase is a function of the delay pair
+> `(N_t, N_{t+1})` at `m = 2`, `τ = 1`; (b) the stated mechanism (singular *marginal*
+> measure) is removed by the method's own rank normalization; and (c) the p-values were
+> invalid — with the published order of operations the procedure is not even
+> distribution-free, reaching an empirical size of **0.85** at nominal 0.05 on a Cauchy
+> marginal.
+>
+> Under a matched, corrected protocol the classical missing-ordinal-pattern baseline
+> scores 37/40 against 34/40 for the construction described here.
+>
+> **The detector claim of v1 is withdrawn.** What survives is a calibrated,
+> preprocessing-free procedure with measured limits and an open benchmark — see
+> [`v2/README.md`](https://github.com/Theclimateguy/DDBM/blob/v2/v2/README.md) and the
+> manuscript in [`paper/`](https://github.com/Theclimateguy/DDBM/tree/v2/paper).
+> The accuracy figures below come from the uncalibrated v1 procedure and should not be
+> relied upon.
+
+
+
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18753233-blue)](https://doi.org/10.5281/zenodo.18753233)
