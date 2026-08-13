@@ -52,7 +52,7 @@ benchmark. The modular arithmetic is discarded.
 \emph{What we found.} The order of operations decides whether the test is valid
 at all. Detrending, AR(1) prewhitening and volatility standardization applied
 \emph{before} rank normalization destroy distribution-freeness: empirical size
-at nominal $0.05$ reaches $0.19$ for a lognormal marginal and $0.85$ for a
+at nominal $0.05$ reaches $0.19$ for a lognormal marginal and $0.88$ for a
 Cauchy marginal. Working on ranks alone restores exact distribution-freeness,
 with a one-line proof, and returns nominal size across six marginals. We also
 audit the surrogate stage, which is where every verdict ultimately rests: it
@@ -255,8 +255,9 @@ orders empirically (Table~\ref{tab:orders}).
 \begin{table}[h]
 \centering
 \caption{Worst deviation of empirical size from the nominal $0.05$ across the six
-marginals of Table~\ref{tab:pivot}, for four orders of operations
-($150$ series per cell).}
+marginals of Table~\ref{tab:pivot}, for four orders of operations. This is a
+separate, smaller run ($150$ series per cell, $B=400$), so variant~A reproduces
+the defect at $0.853$ rather than the $0.880$ of Table~\ref{tab:pivot}.}
 \label{tab:orders}
 \begin{tabular}{llr}
 \toprule

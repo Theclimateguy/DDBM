@@ -1,156 +1,86 @@
-# DDBM: Diophantine Dynamical Boundary Method
+# DDBM
 
-> ### ⚠️ Superseded by v2 — the detector claim below is withdrawn
->
-> Version 2 ([`v2` branch](https://github.com/Theclimateguy/DDBM/tree/v2)) found that
-> (a) the method is **not** embedding-free — the phase is a function of the delay pair
-> `(N_t, N_{t+1})` at `m = 2`, `τ = 1`; (b) the stated mechanism (singular *marginal*
-> measure) is removed by the method's own rank normalization; and (c) the p-values were
-> invalid — with the published order of operations the procedure is not even
-> distribution-free, reaching an empirical size of **0.85** at nominal 0.05 on a Cauchy
-> marginal.
->
-> Under a matched, corrected protocol the classical missing-ordinal-pattern baseline
-> scores 37/40 against 34/40 for the construction described here.
->
-> **The detector claim of v1 is withdrawn.** What survives is a calibrated,
-> preprocessing-free procedure with measured limits and an open benchmark — see
-> [`v2/README.md`](https://github.com/Theclimateguy/DDBM/blob/v2/v2/README.md) and the
-> manuscript in [`paper/`](https://github.com/Theclimateguy/DDBM/tree/v2/paper).
-> The accuracy figures below come from the uncalibrated v1 procedure and should not be
-> relied upon.
+A screening test for deterministic structure in univariate time series, and an
+open benchmark for evaluating such tests.
 
+> **Status: version 2 supersedes version 1, and withdraws its detector claim.**
+> The v1 method is retained in this repository for reference only; its reported
+> accuracy came from an uncalibrated procedure and should not be relied upon.
+> Current work is on the [`v2` branch](https://github.com/Theclimateguy/DDBM/tree/v2).
 
+## What v2 says
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18753233-blue)](https://doi.org/10.5281/zenodo.18753233)
+v1 proposed a modular-arithmetic "Diophantine phase" statistic. Three of its
+claims do not survive:
 
-DDBM is a statistical method for distinguishing deterministic chaotic dynamics from periodic/quasi-periodic oscillations and noise in **univariate** time series, without phase-space reconstruction or training data.
+- **Not embedding-free.** The phase is a function of the delay pair
+  `(N_t, N_{t+1})` with `m = 2`, `τ = 1`, quantized at `1/K`; scanning `K` scans
+  box scale.
+- **The stated mechanism is self-cancelling.** v1 attributed the signal to a
+  singular *marginal* measure occupying few bins; rank normalization removes
+  exactly that. The test sees transition geometry.
+- **The p-values were invalid** — and not merely because overlapping pairs are
+  dependent: with the published order of operations the procedure is not
+  distribution-free, reaching empirical size **0.88** at nominal 0.05 on a
+  Cauchy marginal.
 
-Repository: https://github.com/Theclimateguy/DDBM
+What v2 contributes instead:
 
-## Motivation
+1. **Operation order determines validity.** Amplitude preprocessing before
+   ranking destroys distribution-freeness (size 0.19 lognormal, 0.88 Cauchy);
+   ranks-only restores it, with a one-line proof and nominal size across six
+   marginals.
+2. **Measured surrogate limits.** The IAAFT stage rejects a static monotone
+   transform of a linear process — inside its own null — in 25% of replicates,
+   and heteroscedastic processes in 50–75%. This invalidates the financial
+   conclusion of v1.
+3. **A baseline-specification trap.** At `n = 1e4` the missing-ordinal-pattern
+   statistic is identically zero under the null for `d ≤ 6`.
+4. **An open benchmark** of 165 series whose synthetic labels are computed from
+   Lyapunov exponents rather than asserted.
 
-In climate science, finance, and other complex systems, a practical question precedes modeling: does the observed signal contain deterministic structure (potentially exploitable for prediction/control), or is it indistinguishable from a stochastic process after removing trends and linear dependence?
+Matched comparison — same calibration, same surrogate stage, same decision rule,
+preprocessing-free, 40 labeled series, strict scoring:
 
-Many chaos diagnostics require embedding choices, long sample sizes, or can be sensitive to colored noise. DDBM targets a conservative, hypothesis-testing-based screening workflow on scalar observables.
+| statistic | accuracy | empirical size |
+|---|---|---|
+| missing ordinal patterns, `d ∈ {6,7,8}` | **37/40** | 0.067–0.100 |
+| pair occupancy `(N_t, ΔN_t)` | 35/40 | 0.033–0.092 |
+| cyclotomic phase scan | 34/40 | 0.025–0.067 |
 
-## Core idea (Diophantine lattice resonance)
+**No new detection principle is claimed.** The mechanism is the
+forbidden/missing-pattern paradigm and coarse-grained transition statistics; the
+contribution is the calibrated decision layer, the measured limits and the
+benchmark.
 
-Chaotic attractors often carry singular (fractal) invariant measures. When a scalar observable is rank-normalized to $[0,1]$ and quantized onto an integer lattice, the trajectory can occupy a sparse subset of bins at certain resolutions.
+## Layout
 
-DDBM amplifies this sparsity via modular arithmetic, producing a “Diophantine phase” whose empirical distribution deviates from $\mathrm{Uniform}(0,1)$ for resonant quantization scales in deterministic chaos, while i.i.d. noise remains asymptotically equidistributed.
+```
+paper/     v2 manuscript (LaTeX source, bibliography, figure, PDF)
+v2/        code and benchmark for v2 — start at v2/README.md
+src/ddbm/  the v1 library, retained for reference
+data/      the v1 benchmark manifest
+```
 
-## Method (high level)
-
-Given a time series $x_1,\dots,x_n$:
-
-1) **Two-level preprocessing**
-- Level 1 (raw): rank/quantile normalization to $[0,1]$.
-- Level 2 (residual): linear detrending, then AR(1) prewhitening; optionally standardize conditional volatility if ARCH effects are detected (Ljung–Box on squared residuals).
-Classification requires structure detection at the residual level to reduce confounding by trends/linear dynamics.
-
-2) **Lattice quantization**
-Use a two-stage scan over $K \in [10,1000]$: a coarse grid (step 50), then a fine local search (step 5) around the best coarse scale. Map $u_t\in[0,1]$ to integers $N_t=\lfloor Ku_t+0.5\rfloor.$
-
-3) **Diophantine phase construction**
-Using the cubic kernel $S_3(N)=3N^2+3N+1$ and increments $\Delta N_t=N_{t+1}-N_t$, compute a normalized modular phase $\Xi_t\in[0,1)$.
-
-4) **Uniformity testing across $K$**
-Test $H_0:\ \Xi_t \sim \mathrm{Uniform}(0,1)$ using a KS-based goodness-of-fit procedure with multiple-testing correction over scanned $K$ values; rejection implies “structured”.
-
-5) **Regularity filter**
-After “structured” is detected, separate chaos vs regular dynamics using spectral concentration and autocorrelation persistence (plus a high permutation-entropy gate), yielding labels like CHAOS vs REGULAR; otherwise classify as NOISE/NOT-CHAOS-CANDIDATE.
-
-## Validation (benchmark summary)
-
-On 40 benchmark systems spanning canonical chaotic attractors (Lorenz, Hénon, Rössler, Chua, logistic map), periodic/quasi-periodic dynamics, and stochastic processes (i.i.d. noise, AR, GARCH, random walk, plus financial data), the current report is **92.5% overall accuracy (37/40)**.
-
-In that benchmark set, i.i.d. Gaussian white noise produced zero false positives, while observed misclassifications concentrate at boundary cases: quasi-periodic irrational rotations (circle map), very low SNR chaos+noise mixtures (~5 dB), and an IAAFT surrogate artifact.
-
-## Reproducible batch harness (v7.2)
-
-This repository includes a standalone reproducible runner:
-
-- `ddbm_batch_runner_v7_2.py`
-- `data/test/benchmark_manifest_v7_1.csv`
-
-What it adds:
-
-- manifest-defined 40-case benchmark scoring (including explicit `Mixed` scoring rule),
-- resume support (reuses existing per-file JSON outputs),
-- persistent null-pool cache under `results_test/null_cache/`,
-- explicit benchmark report outputs.
-
-Run:
+## Quick start
 
 ```bash
-python3 ddbm_batch_runner_v7_2.py
+pip install -r requirements.txt
+pip install wfdb nolds sympy matplotlib scipy
+cd v2
+python build_dataset.py     # downloads real data, regenerates synthetic series
+python ordinal_scaled.py    # the matched comparison above
 ```
 
-Outputs:
-
-- `results_test/batch_summary_twolevel.csv`
-- `results_test/benchmark_report_v7_1.json`
-- `results_test/benchmark_category_summary.csv`
-
-## Quick start (API-style example)
-
-```python
-from ddbm import analyze_timeseries
-
-# Logistic map (chaotic regime)
-x = [0.1]
-for _ in range(5000):
-    x.append(4.0 * x[-1] * (1 - x[-1]))
-
-result = analyze_timeseries(x)
-print(result["final_status"])
-```
-
-
-## Installation
-
-Clone and install locally:
-
-```bash
-git clone https://github.com/Theclimateguy/DDBM.git
-cd DDBM
-python setup.py install
-```
-
-(If you publish a PyPI package later, add the `pip install ddbm` line here.) 
-
-## Article
-
-Published record on Zenodo:
-
-- https://zenodo.org/records/18753233
+Series files are not redistributed; `build_dataset.py` rebuilds them from
+primary sources, whose own terms apply.
 
 ## Citation
 
-```bibtex
-@misc{ddbm2026,
-  title={Diophantine Lattice Resonance for Chaos Detection in Time Series},
-  author={Sotiriadi, Nazar},
-  year={2026},
-  howpublished={Zenodo},
-  url={https://zenodo.org/records/18753233}
-}
-```
-
+See [`CITATION.cff`](CITATION.cff). The record is
+[10.5281/zenodo.18753233](https://doi.org/10.5281/zenodo.18753233); cite version
+2 unless you specifically mean the withdrawn v1 claim.
 
 ## License
 
-MIT License. See LICENSE for details. 
-
-## Contact
-
-- Issues: GitHub Issues
-- Email: n.sotiriadi@gmail.com 
-
----
-
-Version: 7.2
-Last updated: February 2026 [file:2]
+MIT — see [LICENSE](LICENSE).
