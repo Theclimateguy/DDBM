@@ -26,31 +26,44 @@ claims do not survive:
 
 What v2 contributes instead:
 
-1. **Operation order determines validity.** Amplitude preprocessing before
-   ranking destroys distribution-freeness (size 0.19 lognormal, 0.88 Cauchy);
-   ranks-only restores it, with a one-line proof and nominal size across six
-   marginals.
-2. **Measured surrogate limits.** The IAAFT stage rejects a static monotone
-   transform of a linear process — inside its own null — in 25% of replicates,
-   and heteroscedastic processes in 50–75%. This invalidates the financial
-   conclusion of v1.
+1. **Two domain errors, one principle.** Every operation must be performed in
+   the domain where its null is defined. Amplitude preprocessing before ranking
+   destroys distribution-freeness (size 0.19 lognormal, 0.88 Cauchy); ranks-only
+   restores it with a one-line proof. IAAFT surrogates built from raw amplitudes
+   reject a cubed AR(1) — inside their own null — in 100% of replicates;
+   generated in normal scores the rate returns to nominal and power improves.
+2. **A three-line diagnostic.** A monotone transform preserves ranks, so a rank
+   statistic must treat AR(1), its cube and its exponential identically.
+   Amplitude domain: 0.03 / 1.00 / 1.00. Normal scores: 0.07 / 0.07 / 0.07.
 3. **A baseline-specification trap.** At `n = 1e4` the missing-ordinal-pattern
-   statistic is identically zero under the null for `d ≤ 6`.
-4. **An open benchmark** of 165 series whose synthetic labels are computed from
-   Lyapunov exponents rather than asserted.
+   statistic is identically zero under the null for `d ≤ 6`. Above that floor
+   the choice of `d` is immaterial.
+4. **A benchmark whose scored part is frozen** — all 46 labeled series are
+   byte-reproducible from fixed seeds and pinned by SHA-256; the 119 unlabeled
+   series come from live sources and are illustrative only.
+5. **S&P 500 resolved, not just withdrawn.** Log returns are rejected by an
+   IAAFT null (p = 0.02) but not by a fitted GARCH(1,1) null (p = 0.31): the
+   apparent structure is conditional heteroscedasticity.
 
-Matched comparison — same calibration, same surrogate stage, same decision rule,
-preprocessing-free, 40 labeled series, strict scoring:
+Matched comparison — identical calibration, normal-scores confirmation, decision
+rule and auxiliary criteria; 40 labeled series, strict scoring (the six
+chaos+noise cases are excluded, not counted correct under either label):
 
-| statistic | accuracy | empirical size |
-|---|---|---|
-| missing ordinal patterns, `d ∈ {6,7,8}` | **37/40** | 0.067–0.100 |
-| pair occupancy `(N_t, ΔN_t)` | 35/40 | 0.033–0.092 |
-| cyclotomic phase scan | 34/40 | 0.025–0.067 |
+| statistic | accuracy | Chaos | Regular | Noise |
+|---|---|---|---|---|
+| missing ordinal patterns, `d ∈ {6,7,8}` | **37/40** | 13/14 | 9/10 | 15/16 |
+| cyclotomic phase scan | 36/40 | 11/14 | 9/10 | **16/16** |
+| pair occupancy `(N_t, ΔN_t)` | 34/40 | 13/14 | 9/10 | 12/16 |
+
+The last two exchange places when the surrogate domain is repaired (it was
+occupancy 35, phases 34 with amplitude-domain surrogates), which is itself
+evidence that accuracy at a single α on forty series cannot separate close
+competitors. These are calibration results on the set used to fix thresholds,
+not independent validation.
 
 **No new detection principle is claimed.** The mechanism is the
 forbidden/missing-pattern paradigm and coarse-grained transition statistics; the
-contribution is the calibrated decision layer, the measured limits and the
+contribution is the validated inference layer, the measured limits and the
 benchmark.
 
 ## Layout
