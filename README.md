@@ -33,8 +33,10 @@ What v2 contributes instead:
    reject a cubed AR(1) — inside their own null — in 100% of replicates;
    generated in normal scores the rate returns to nominal and power improves.
 2. **A three-line diagnostic.** A monotone transform preserves ranks, so a rank
-   statistic must treat AR(1), its cube and its exponential identically.
-   Amplitude domain: 0.03 / 1.00 / 1.00. Normal scores: 0.07 / 0.07 / 0.07.
+   statistic must treat AR(1), its cube and its exponential identically. Over
+   100 replicates — amplitude domain: 0.02 / **1.00** / **1.00**; normal scores:
+   0.05 / 0.05 / 0.05. Conditional heteroscedasticity survives the repair
+   (0.15) and needs a model-based null.
 3. **A baseline-specification trap.** At `n = 1e4` the missing-ordinal-pattern
    statistic is identically zero under the null for `d ≤ 6`. Above that floor
    the choice of `d` is immaterial.

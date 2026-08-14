@@ -25,9 +25,16 @@ its null is defined.** Violating it in either place destroys validity silently.
 
 **Diagnostic worth running always.** A static monotone transform preserves ranks,
 so a rank statistic must give AR(1), its cube and its exponential the same
-rejection rate. Amplitude domain: 0.03 / 1.00 / 1.00. Rank domain: 0.47 / 0.47 /
-0.47. Normal scores: 0.07 / 0.07 / 0.07. Agreement is the signature of a
-correctly specified test; disagreement is proof of misspecification.
+rejection rate. Over 100 replicates — amplitude domain: 0.02 / **1.00** /
+**1.00**; normal scores: 0.05 / 0.05 / 0.05, all with interval [0.02, 0.11].
+Agreement is the signature of a correctly specified test; disagreement is proof
+of misspecification.
+
+**One failure the repair does not fix.** GARCH(1,1) returns are rejected at 0.15
+[0.09, 0.23] even in normal scores: conditional heteroscedasticity lies outside
+the IAAFT null and needs a model-based null. A 30-replicate run read 0.00 for
+this cell — small size studies deserve the same suspicion as small power
+studies.
 
 **Pattern length has a floor, not a tuning knob.** At `n = 1e4` the expected
 fraction of unobserved ordinal patterns is 0.000 for `d ≤ 6`, 0.138 for `d = 7`,
@@ -56,6 +63,7 @@ the set used to fix thresholds, not independent validation.
 | `passport.py` | calibration, kernels, surrogate stages (imported by the rest) |
 | `final_benchmark.py` | the matched comparison above (paper Tables 4–5) |
 | `surrogate_normalscores.py` | the normal-scores repair (paper Table 3) |
+| `size_study_100.py` | 100-replicate size study with Wilson intervals |
 | `surrogate_domain.py` | the amplitude/rank domain failures (paper Table 3) |
 | `pivotality_fix.py` | four orders of operations (paper Table 2) |
 | `essential_revisions.py` | surrogate-size audit, pattern-length study, S&P case |
@@ -81,6 +89,7 @@ python build_dataset.py
 python hash_manifest.py check     # verify the regenerated series
 python pivotality_fix.py          # screening-stage domain study
 python surrogate_normalscores.py  # confirmation-stage repair
+python size_study_100.py          # 100-replicate size table
 python essential_revisions.py     # surrogate audit, pattern length, S&P
 python final_benchmark.py         # the matched comparison
 ```
