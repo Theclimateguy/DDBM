@@ -18,7 +18,7 @@ preferred-citation:
   title: "A Calibrated, Preprocessing-Free Rank Test for Deterministic Structure in Time Series: Operation Order, Measured Surrogate Limits, and an Open Benchmark"
   year: 2026
   notes: "Version 2. Supersedes the version 1 preprint; the detector claim of v1 is withdrawn."
-  url: "https://doi.org/10.5281/zenodo.18753233"
+  doi: "10.5281/zenodo.21924169"
 references:
   - type: article
     authors:

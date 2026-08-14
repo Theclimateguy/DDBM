@@ -93,9 +93,9 @@ primary sources, whose own terms apply.
 
 ## Citation
 
-See [`CITATION.cff`](CITATION.cff). The record is
-[10.5281/zenodo.18753233](https://doi.org/10.5281/zenodo.18753233); cite version
-2 unless you specifically mean the withdrawn v1 claim.
+See [`CITATION.cff`](CITATION.cff). Version 2 is
+[10.5281/zenodo.21924169](https://doi.org/10.5281/zenodo.21924169); version 1, whose
+detector claim is withdrawn, is [10.5281/zenodo.18753233](https://doi.org/10.5281/zenodo.18753233).
 
 ## License
 
