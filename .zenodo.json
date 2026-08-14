@@ -29,6 +29,12 @@
   "language": "eng",
   "related_identifiers": [
     {
+      "identifier": "10.5281/zenodo.18753232",
+      "relation": "isVersionOf",
+      "resource_type": "publication-preprint",
+      "scheme": "doi"
+    },
+    {
       "identifier": "10.5281/zenodo.18753233",
       "relation": "isNewVersionOf",
       "resource_type": "publication-preprint",
@@ -42,5 +48,6 @@
     }
   ],
   "notes": "Version 2 supersedes version 1; the detector claim of v1 is withdrawn. Prepared in response to three independent referee reports. Code, benchmark, verbatim run logs and manuscript sources are in the v2 branch of the linked repository.",
-  "doi": "10.5281/zenodo.21924169"
+  "doi": "10.5281/zenodo.21924169",
+  "conceptdoi": "10.5281/zenodo.18753232"
 }

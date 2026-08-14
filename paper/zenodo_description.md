@@ -1,6 +1,7 @@
 # Zenodo v2 — form fields
 
 Published: **10.5281/zenodo.21924169** (version 2 of 10.5281/zenodo.18753233).
+Concept DOI, resolving to the latest version: **10.5281/zenodo.18753232**.
 
 ## Title
 Two Domain Errors in a Symbolic Test for Deterministic Structure, and Their

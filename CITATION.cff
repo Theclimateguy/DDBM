@@ -8,6 +8,7 @@ title: "A calibrated, preprocessing-free rank test for deterministic structure i
 version: 2.0.0
 date-released: 2026-08-06
 url: "https://github.com/Theclimateguy/DDBM/tree/v2"
+doi: "10.5281/zenodo.18753232"
 repository-code: "https://github.com/Theclimateguy/DDBM"
 license: MIT
 preferred-citation:
@@ -19,6 +20,7 @@ preferred-citation:
   year: 2026
   notes: "Version 2. Supersedes the version 1 preprint; the detector claim of v1 is withdrawn."
   doi: "10.5281/zenodo.21924169"
+  notes: "Concept DOI 10.5281/zenodo.18753232 always resolves to the latest version."
 references:
   - type: article
     authors:

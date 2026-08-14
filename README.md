@@ -93,9 +93,13 @@ primary sources, whose own terms apply.
 
 ## Citation
 
-See [`CITATION.cff`](CITATION.cff). Version 2 is
-[10.5281/zenodo.21924169](https://doi.org/10.5281/zenodo.21924169); version 1, whose
-detector claim is withdrawn, is [10.5281/zenodo.18753233](https://doi.org/10.5281/zenodo.18753233).
+See [`CITATION.cff`](CITATION.cff).
+
+- **Cite the work** (always resolves to the latest version):
+  [10.5281/zenodo.18753232](https://doi.org/10.5281/zenodo.18753232)
+- **Cite this version** (v2): [10.5281/zenodo.21924169](https://doi.org/10.5281/zenodo.21924169)
+- Version 1, whose detector claim is withdrawn:
+  [10.5281/zenodo.18753233](https://doi.org/10.5281/zenodo.18753233)
 
 ## License
 
