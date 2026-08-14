@@ -31,7 +31,7 @@ What v2 contributes instead:
    destroys distribution-freeness (size 0.19 lognormal, 0.88 Cauchy); ranks-only
    restores it with a one-line proof. IAAFT surrogates built from raw amplitudes
    reject a cubed AR(1) — inside their own null — in 100% of replicates;
-   generated in normal scores the rate returns to nominal and power improves.
+   generated in normal scores the rate returns to nominal with no loss of power.
 2. **A three-line diagnostic.** A monotone transform preserves ranks, so a rank
    statistic must treat AR(1), its cube and its exponential identically. Over
    100 replicates — amplitude domain: 0.02 / **1.00** / **1.00**; normal scores:
@@ -73,6 +73,7 @@ benchmark.
 ```
 paper/     v2 manuscript (LaTeX source, bibliography, figure, PDF)
 v2/        code and benchmark for v2 — start at v2/README.md
+v2/results/ verbatim output of every run behind the manuscript
 src/ddbm/  the v1 library, retained for reference
 data/      the v1 benchmark manifest
 ```

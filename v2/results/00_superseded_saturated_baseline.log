@@ -1,0 +1,55 @@
+labeled series: 46
+calibrating both statistics at n=10000 ...
+  logistic_r2.80         truth=Regular  passport=Regular      ordinal=Regular     
+  logistic_r3.00         truth=Regular  passport=Regular      ordinal=Regular     
+  logistic_r3.50         truth=Regular  passport=Regular      ordinal=Regular     
+  logistic_r3.57         truth=Chaos    passport=Regular      ordinal=Regular     
+  logistic_r3.70         truth=Chaos    passport=Chaos        ordinal=Chaos       
+  logistic_r3.90         truth=Chaos    passport=Chaos        ordinal=Chaos       
+  logistic_r4.00         truth=Chaos    passport=Chaos        ordinal=Chaos       
+  henon_x_a1.4           truth=Chaos    passport=Chaos        ordinal=Chaos       
+  henon_y_a1.4           truth=Chaos    passport=Chaos        ordinal=Chaos       
+  henon_x_a1.1           truth=Chaos    passport=Chaos        ordinal=Chaos       
+  henon_x_a1.3           truth=Regular  passport=Regular      ordinal=Regular     
+  lorenz_x_rho28         truth=Chaos    passport=Chaos        ordinal=Chaos       
+  lorenz_y_rho28         truth=Chaos    passport=Chaos        ordinal=Chaos       
+  lorenz_z_rho28         truth=Chaos    passport=Chaos        ordinal=Chaos       
+  lorenz_x_rho10         truth=Regular  passport=Regular      ordinal=Regular     
+  rossler_x_c5.7         truth=Chaos    passport=Chaos        ordinal=Chaos       
+  rossler_y_c5.7         truth=Chaos    passport=Chaos        ordinal=Chaos       
+  rossler_x_c2.5         truth=Regular  passport=Regular      ordinal=Regular     
+  chua_x                 truth=Chaos    passport=Noise        ordinal=Chaos       
+  chua_y                 truth=Chaos    passport=Chaos        ordinal=Chaos       
+  white_noise_1          truth=Noise    passport=Noise        ordinal=Noise       
+  white_noise_2          truth=Noise    passport=Noise        ordinal=Noise       
+  white_noise_3          truth=Noise    passport=Noise        ordinal=Noise       
+  white_uniform          truth=Noise    passport=Noise        ordinal=Noise       
+  student_t3             truth=Noise    passport=Noise        ordinal=Noise       
+  ar1_phi0.3             truth=Noise    passport=Noise        ordinal=Noise       
+  ar1_phi0.7             truth=Noise    passport=Noise        ordinal=Noise       
+  ar1_phi0.9             truth=Noise    passport=Noise        ordinal=Noise       
+  arma22                 truth=Noise    passport=Noise        ordinal=Noise       
+  random_walk            truth=Noise    passport=Noise        ordinal=Noise       
+  garch_returns          truth=Noise    passport=Noise        ordinal=Noise       
+  garch_volatility       truth=Noise    passport=Chaos        ordinal=Noise       
+  fgn_h0.8               truth=Noise    passport=Noise        ordinal=Noise       
+  sine_pure              truth=Regular  passport=Regular      ordinal=Regular     
+  sine_plus_noise        truth=Regular  passport=Noise        ordinal=Noise       
+  quasi_sine_sum         truth=Regular  passport=Regular      ordinal=Regular     
+  circle_map_qp          truth=Regular  passport=Regular      ordinal=Regular     
+  henon_SNR5dB           truth=Mixed    passport=NonlinStoch  ordinal=NonlinStoch 
+  logistic_SNR5dB        truth=Mixed    passport=NonlinStoch  ordinal=NonlinStoch 
+  henon_SNR10dB          truth=Mixed    passport=NonlinStoch  ordinal=NonlinStoch 
+  logistic_SNR10dB       truth=Mixed    passport=NonlinStoch  ordinal=NonlinStoch 
+  henon_SNR20dB          truth=Mixed    passport=Chaos        ordinal=Chaos       
+  logistic_SNR20dB       truth=Mixed    passport=Chaos        ordinal=Chaos       
+  iaaft_lorenz_x         truth=Noise    passport=Noise        ordinal=Noise       
+  iaaft_henon_x          truth=Noise    passport=Noise        ordinal=Noise       
+  shuffle_lorenz_x       truth=Noise    passport=Noise        ordinal=Noise       
+
+passport (cyclotomic phases): 42/46 = 91.3%
+missing ordinal patterns:    44/46 = 95.7%
+
+disagreements (2):
+  chua_x                 truth=Chaos    passport=Noise        ordinal=Chaos       
+  garch_volatility       truth=Noise    passport=Chaos        ordinal=Noise       

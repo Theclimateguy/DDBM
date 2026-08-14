@@ -1,0 +1,55 @@
+=== final configuration, 40 labeled series, strict scoring ===
+  logistic_r2.80         Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  logistic_r3.00         Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  logistic_r3.50         Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  logistic_r3.57         Chaos    occupancy=Regular   ordinal=Regular   phases=Regular 
+  logistic_r3.70         Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  logistic_r3.90         Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  logistic_r4.00         Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  henon_x_a1.4           Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  henon_y_a1.4           Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  henon_x_a1.1           Chaos    occupancy=Chaos     ordinal=Chaos     phases=Noise   
+  henon_x_a1.3           Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  lorenz_x_rho28         Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  lorenz_y_rho28         Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  lorenz_z_rho28         Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  lorenz_x_rho10         Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  rossler_x_c5.7         Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  rossler_y_c5.7         Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  rossler_x_c2.5         Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  chua_x                 Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  chua_y                 Chaos    occupancy=Chaos     ordinal=Chaos     phases=Regular 
+  white_noise_1          Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  white_noise_2          Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  white_noise_3          Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  white_uniform          Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  student_t3             Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  ar1_phi0.3             Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  ar1_phi0.7             Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  ar1_phi0.9             Noise    occupancy=Chaos     ordinal=Noise     phases=Noise   
+  arma22                 Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  random_walk            Noise    occupancy=Chaos     ordinal=Noise     phases=Noise   
+  garch_returns          Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  garch_volatility       Noise    occupancy=Chaos     ordinal=Chaos     phases=Noise   
+  fgn_h0.8               Noise    occupancy=Chaos     ordinal=Noise     phases=Noise   
+  sine_pure              Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  sine_plus_noise        Regular  occupancy=Noise     ordinal=Noise     phases=Noise   
+  quasi_sine_sum         Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  circle_map_qp          Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  iaaft_lorenz_x         Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  iaaft_henon_x          Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  shuffle_lorenz_x       Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+
+  occupancy   34/40 = 85.0%
+      misses: logistic_r3.57, ar1_phi0.9, random_walk, garch_volatility, fgn_h0.8, sine_plus_noise
+  ordinal     37/40 = 92.5%
+      misses: logistic_r3.57, garch_volatility, sine_plus_noise
+  phases      36/40 = 90.0%
+      misses: logistic_r3.57, henon_x_a1.1, chua_y, sine_plus_noise
+
+--- class-wise ---
+  Chaos    (n=14) occupancy=13/14  ordinal=13/14  phases=11/14  
+  Regular  (n=10) occupancy=9/10  ordinal=9/10  phases=9/10  
+  Noise    (n=16) occupancy=12/16  ordinal=15/16  phases=16/16  
+
+saved final_benchmark_results.csv

@@ -1,0 +1,88 @@
+saturation check for i.i.d. data at n = 10000:
+  d       d!  windows  E[missing frac]
+  4       24     9997           0.0000
+  5      120     9996           0.0000
+  6      720     9995           0.0000
+  7     5040     9994           0.1376
+  8    40320     9993           0.7805
+  9   362880     9992           0.9728
+a usable d has E[missing frac] well away from both 0 and 1
+
+=== empirical size, preprocessing-free, by marginal ===
+statistic      marginal      size@.05      KS    p_KS
+occupancy      gaussian         0.092   0.050   0.912
+occupancy      uniform          0.033   0.064   0.688
+occupancy      t3               0.067   0.120   0.059
+occupancy      lognormal        0.067   0.110   0.104
+occupancy      exponential      0.050   0.094   0.221
+occupancy      cauchy           0.067   0.080   0.406
+
+ordinal_d678   gaussian         0.100   0.105   0.135
+ordinal_d678   uniform          0.083   0.079   0.415
+ordinal_d678   t3               0.067   0.083   0.367
+ordinal_d678   lognormal        0.075   0.059   0.775
+ordinal_d678   exponential      0.083   0.057   0.810
+ordinal_d678   cauchy           0.075   0.058   0.787
+
+phases         gaussian         0.050   0.100   0.169
+phases         uniform          0.042   0.074   0.508
+phases         t3               0.025   0.095   0.210
+phases         lognormal        0.067   0.076   0.466
+phases         exponential      0.025   0.110   0.100
+phases         cauchy           0.050   0.131   0.030
+
+=== benchmark, strict scoring, 40 labeled series ===
+  logistic_r2.80         Regular  occupancy=Regular   ordinal_d678=Regular   phases=Regular 
+  logistic_r3.00         Regular  occupancy=Regular   ordinal_d678=Regular   phases=Regular 
+  logistic_r3.50         Regular  occupancy=Regular   ordinal_d678=Regular   phases=Regular 
+  logistic_r3.57         Chaos    occupancy=Regular   ordinal_d678=Regular   phases=Regular 
+  logistic_r3.70         Chaos    occupancy=Chaos     ordinal_d678=Chaos     phases=Chaos   
+  logistic_r3.90         Chaos    occupancy=Chaos     ordinal_d678=Chaos     phases=Chaos   
+  logistic_r4.00         Chaos    occupancy=Chaos     ordinal_d678=Chaos     phases=Chaos   
+  henon_x_a1.4           Chaos    occupancy=Chaos     ordinal_d678=Chaos     phases=Chaos   
+  henon_y_a1.4           Chaos    occupancy=Chaos     ordinal_d678=Chaos     phases=Chaos   
+  henon_x_a1.1           Chaos    occupancy=Chaos     ordinal_d678=Chaos     phases=Noise   
+  henon_x_a1.3           Regular  occupancy=Regular   ordinal_d678=Regular   phases=Regular 
+  lorenz_x_rho28         Chaos    occupancy=Chaos     ordinal_d678=Chaos     phases=Noise   
+  lorenz_y_rho28         Chaos    occupancy=Chaos     ordinal_d678=Chaos     phases=Chaos   
+  lorenz_z_rho28         Chaos    occupancy=Chaos     ordinal_d678=Chaos     phases=Chaos   
+  lorenz_x_rho10         Regular  occupancy=Regular   ordinal_d678=Regular   phases=Regular 
+  rossler_x_c5.7         Chaos    occupancy=Chaos     ordinal_d678=Chaos     phases=Chaos   
+  rossler_y_c5.7         Chaos    occupancy=Chaos     ordinal_d678=Chaos     phases=Chaos   
+  rossler_x_c2.5         Regular  occupancy=Regular   ordinal_d678=Regular   phases=Regular 
+  chua_x                 Chaos    occupancy=Noise     ordinal_d678=Chaos     phases=Noise   
+  chua_y                 Chaos    occupancy=Chaos     ordinal_d678=Chaos     phases=Regular 
+  white_noise_1          Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  white_noise_2          Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  white_noise_3          Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  white_uniform          Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  student_t3             Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  ar1_phi0.3             Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  ar1_phi0.7             Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  ar1_phi0.9             Noise    occupancy=Chaos     ordinal_d678=Noise     phases=Noise   
+  arma22                 Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  random_walk            Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  garch_returns          Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  garch_volatility       Noise    occupancy=Chaos     ordinal_d678=Chaos     phases=Noise   
+  fgn_h0.8               Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  sine_pure              Regular  occupancy=Regular   ordinal_d678=Regular   phases=Regular 
+  sine_plus_noise        Regular  occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  quasi_sine_sum         Regular  occupancy=Regular   ordinal_d678=Regular   phases=Regular 
+  circle_map_qp          Regular  occupancy=Regular   ordinal_d678=Regular   phases=Regular 
+  iaaft_lorenz_x         Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  iaaft_henon_x          Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+  shuffle_lorenz_x       Noise    occupancy=Noise     ordinal_d678=Noise     phases=Noise   
+
+  occupancy      35/40 = 87.5%
+      misses: logistic_r3.57, chua_x, ar1_phi0.9, garch_volatility, sine_plus_noise
+  ordinal_d678   37/40 = 92.5%
+      misses: logistic_r3.57, garch_volatility, sine_plus_noise
+  phases         34/40 = 85.0%
+      misses: logistic_r3.57, henon_x_a1.1, lorenz_x_rho28, chua_x, chua_y, sine_plus_noise
+
+--- class-wise ---
+  Chaos    (n=14) occupancy=12/14  ordinal_d678=13/14  phases=9/14  
+  Regular  (n=10) occupancy=9/10  ordinal_d678=9/10  phases=9/10  
+  Noise    (n=16) occupancy=14/16  ordinal_d678=15/16  phases=16/16  
+
+saved ordinal_scaled_results.csv

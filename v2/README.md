@@ -18,7 +18,8 @@ its null is defined.** Violating it in either place destroys validity silently.
 3. **Confirm** — IAAFT surrogates generated in **normal scores**,
    `Φ⁻¹(rank/(n+1))`, which is the domain the AAFT null is stated in. Built from
    raw amplitudes they reject a cubed AR(1) — inside their own null — in 100% of
-   replicates. For heteroscedastic data prefer a model-based null.
+   replicates. Not sufficient for heteroscedastic data (size 0.15); use a
+   model-based null there.
 4. **Classify** — extremely narrowband ⇒ *(quasi-)periodic*; otherwise
    *confirmed nonlinear*, split by transition occupancy. Not "chaos": no
    surrogate test establishes determinism.
@@ -78,6 +79,7 @@ the set used to fix thresholds, not independent validation.
 | `make_figures.py` | Figure 1 |
 | `run_all.py` | the superseded pipeline, kept for the auxiliary spectral criteria |
 | `data_bench/` | manifest with provenance and labels, plus result tables |
+| `results/` | verbatim stdout of every run, indexed to the paper's tables |
 
 ## Reproducing
 

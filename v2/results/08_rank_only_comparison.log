@@ -1,0 +1,81 @@
+building tests (preprocessing-free, ranks only) ...
+/Users/theclimateguy/Documents/Projects/misc/ddbm-passport/rank_only_pair.py:93: RuntimeWarning: invalid value encountered in divide
+  self.T_null = np.abs((null - self.mean) / self.sd).max(axis=1)
+
+=== empirical size of the screening stage, by marginal ===
+statistic    marginal      size@.05      KS    p_KS
+occupancy    gaussian         0.067   0.063   0.712
+occupancy    uniform          0.050   0.109   0.106
+occupancy    t3               0.058   0.118   0.064
+occupancy    lognormal        0.025   0.164   0.003
+occupancy    exponential      0.050   0.083   0.358
+occupancy    cauchy           0.025   0.092   0.244
+
+/Users/theclimateguy/Documents/Projects/misc/ddbm-passport/rank_only_pair.py:96: RuntimeWarning: invalid value encountered in divide
+  return float(np.max(np.abs((self.stat(prep(x)) - self.mean) / self.sd)))
+ordinal      gaussian         1.000   0.998   0.000
+ordinal      uniform          1.000   0.998   0.000
+ordinal      t3               1.000   0.998   0.000
+ordinal      lognormal        1.000   0.998   0.000
+ordinal      exponential      1.000   0.998   0.000
+ordinal      cauchy           1.000   0.998   0.000
+
+phases       gaussian         0.017   0.073   0.523
+phases       uniform          0.058   0.079   0.426
+phases       t3               0.033   0.124   0.047
+phases       lognormal        0.058   0.070   0.583
+phases       exponential      0.033   0.092   0.245
+phases       cauchy           0.058   0.079   0.420
+
+=== benchmark, strict scoring, 40 labeled series ===
+/Users/theclimateguy/Documents/Projects/misc/ddbm-passport/rank_only_pair.py:96: RuntimeWarning: divide by zero encountered in divide
+  return float(np.max(np.abs((self.stat(prep(x)) - self.mean) / self.sd)))
+  logistic_r2.80         Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  logistic_r3.00         Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  logistic_r3.50         Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  logistic_r3.57         Chaos    occupancy=Regular   ordinal=Regular   phases=Regular 
+  logistic_r3.70         Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  logistic_r3.90         Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  logistic_r4.00         Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  henon_x_a1.4           Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  henon_y_a1.4           Chaos    occupancy=Chaos     ordinal=Chaos     phases=Chaos   
+  henon_x_a1.1           Chaos    occupancy=Chaos     ordinal=Noise     phases=Noise   
+  henon_x_a1.3           Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  lorenz_x_rho28         Chaos    occupancy=Chaos     ordinal=Noise     phases=Noise   
+  lorenz_y_rho28         Chaos    occupancy=Chaos     ordinal=Noise     phases=Chaos   
+  lorenz_z_rho28         Chaos    occupancy=Chaos     ordinal=Noise     phases=Chaos   
+  lorenz_x_rho10         Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  rossler_x_c5.7         Chaos    occupancy=Chaos     ordinal=Regular   phases=Chaos   
+  rossler_y_c5.7         Chaos    occupancy=Chaos     ordinal=Regular   phases=Chaos   
+  rossler_x_c2.5         Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  chua_x                 Chaos    occupancy=Noise     ordinal=Noise     phases=Noise   
+  chua_y                 Chaos    occupancy=Chaos     ordinal=Regular   phases=Regular 
+  white_noise_1          Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  white_noise_2          Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  white_noise_3          Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  white_uniform          Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  student_t3             Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  ar1_phi0.3             Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  ar1_phi0.7             Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  ar1_phi0.9             Noise    occupancy=Chaos     ordinal=Chaos     phases=Noise   
+  arma22                 Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  random_walk            Noise    occupancy=Noise     ordinal=Chaos     phases=Noise   
+  garch_returns          Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  garch_volatility       Noise    occupancy=Chaos     ordinal=Chaos     phases=Noise   
+  fgn_h0.8               Noise    occupancy=Noise     ordinal=Chaos     phases=Noise   
+  sine_pure              Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  sine_plus_noise        Regular  occupancy=Noise     ordinal=Noise     phases=Noise   
+  quasi_sine_sum         Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  circle_map_qp          Regular  occupancy=Regular   ordinal=Regular   phases=Regular 
+  iaaft_lorenz_x         Noise    occupancy=Noise     ordinal=Chaos     phases=Noise   
+  iaaft_henon_x          Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+  shuffle_lorenz_x       Noise    occupancy=Noise     ordinal=Noise     phases=Noise   
+
+  occupancy    35/40 = 87.5%
+      misses: logistic_r3.57, chua_x, ar1_phi0.9, garch_volatility, sine_plus_noise
+  ordinal      25/40 = 62.5%
+      misses: logistic_r3.57, henon_x_a1.1, lorenz_x_rho28, lorenz_y_rho28, lorenz_z_rho28, rossler_x_c5.7, rossler_y_c5.7, chua_x, chua_y, ar1_phi0.9, random_walk, garch_volatility, fgn_h0.8, sine_plus_noise, iaaft_lorenz_x
+  phases       34/40 = 85.0%
+      misses: logistic_r3.57, henon_x_a1.1, lorenz_x_rho28, chua_x, chua_y, sine_plus_noise
+
+saved rank_only_pair_results.csv

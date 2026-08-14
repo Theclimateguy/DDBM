@@ -1,0 +1,44 @@
+
+==========================================================================
+R5  corrected procedure on S&P 500, IAAFT null vs model-based GARCH null
+==========================================================================
+series                              n  p_screen  p_IAAFT  p_GARCH  reading
+sp500_log_returns_full          10000     0.022    0.020    0.310  explained by GARCH(1,1)
+                                 fitted GARCH: omega=9.25e-07 alpha=0.068 beta=0.924
+sp500_log_returns_2010_2024      3773     0.002    0.730    0.330  explained by GARCH(1,1)
+                                 fitted GARCH: omega=3.70e-06 alpha=0.161 beta=0.807
+sp500_realized_vol              10000     0.002    0.010    0.010  beyond both nulls
+                                 fitted GARCH: omega=5.53e-08 alpha=0.327 beta=0.672
+
+==========================================================================
+R3  sensitivity of the ordinal baseline to the pattern-length grid
+==========================================================================
+expected missing fraction under an i.i.d. null at n = 10000:
+   d=5: d!=    120   E[missing]=0.0000
+   d=6: d!=    720   E[missing]=0.0000
+   d=7: d!=   5040   E[missing]=0.1376
+   d=8: d!=  40320   E[missing]=0.7805
+   d=9: d!= 362880   E[missing]=0.9728
+
+a usable grid keeps E[missing] away from both 0 and 1.
+
+grid           accuracy  size(gauss)  size(cauchy)
+{7}            37/40           0.050         0.033
+{8}            37/40           0.050         0.017
+{7,8}          37/40           0.033         0.033
+{6,7,8}        37/40           0.033         0.033
+{5,6,7,8}      37/40           0.033         0.033
+{7,8,9}        37/40           0.033         0.017
+
+==========================================================================
+R2  IAAFT confirmation-stage size, 50 replicates, B=49
+==========================================================================
+process             screen   IAAFT     95% CI (IAAFT)    n
+white_gauss           0.14    0.08      [0.03, 0.19]   50
+ar1_0.9               1.00    0.08      [0.03, 0.19]   50
+ar2_osc               1.00    0.04      [0.01, 0.13]   50
+arma22                1.00    0.06      [0.02, 0.16]   50
+long_memory           1.00    0.00      [0.00, 0.07]   50
+sine_plus_noise       1.00    0.02      [0.00, 0.10]   50
+cubed_ar1             1.00    1.00      [0.93, 1.00]   50
+garch_returns         0.14    0.10      [0.04, 0.21]   50

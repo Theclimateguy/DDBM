@@ -1,0 +1,16 @@
+=== size, normal-scores surrogates (nominal 0.05) ===
+process            p<.05  spec.mismatch
+ar1_0.9             0.07          0.000
+cubed_ar1           0.07          0.000
+exp_ar1             0.07          0.000
+white_gauss         0.03          0.000
+sine_plus_noise     0.00          0.000
+garch_returns       0.00          0.000
+
+=== power on deterministic systems (rejection desired) ===
+system                   p
+logistic_r4.00       0.010
+henon_x_a1.4         0.010
+lorenz_x_rho28       0.010
+rossler_x_c5.7       0.010
+chua_x               0.010

@@ -1,0 +1,117 @@
+
+========================================================================
+E1/E2  pivotality and calibration size (calibrated under Gaussian, B=1000)
+========================================================================
+null scan statistic T: mean=1.925 sd=0.945 q95=3.583
+
+marginal        n  size@.05  size@.10  KS vs U(0,1)    p_KS
+gaussian      200     0.045     0.090         0.047   0.757
+uniform       200     0.045     0.080         0.081   0.134
+t3            200     0.065     0.080         0.078   0.162
+lognormal     200     0.190     0.245         0.237   0.000
+exponential   200     0.065     0.110         0.107   0.018
+cauchy        200     0.880     0.885         0.840   0.000
+
+nominal size is 0.05 / 0.10; KS p < 0.05 means the p-values are NOT uniform,
+i.e. the calibration does not transfer to that marginal.
+
+========================================================================
+E3  size of the IAAFT confirmation stage on linear / heteroscedastic processes
+========================================================================
+first six rows are INSIDE the IAAFT null (rejection = false positive).
+garch/stochvol are heteroscedastic: outside the null but NOT deterministic.
+
+process             screen<.05  IAAFT<.05  n_rep
+white_gauss               0.00       0.00      8
+ar1_0.5                   0.00       0.00      8
+ar1_0.9                   0.00       0.00      8
+ar2_osc                   1.00       0.12      8
+arma22                    1.00       0.12      8
+long_memory               1.00       0.12      8
+sine_plus_noise           1.00       0.00      8
+t3_iid                    0.12       0.00      8
+cubed_ar1                 1.00       0.25      8
+garch_returns             0.50       0.50      8
+stochvol                  0.75       0.75      8
+
+========================================================================
+E4/E5  decisive comparison: cyclotomic phases vs plain pair occupancy vs ordinal patterns
+========================================================================
+Xi is a deterministic function of (N, dN); a direct occupancy test on that pair
+majorizes any test on Xi. If occupancy matches the phases, the arithmetic is idle.
+
+  logistic_r2.80         Regular  cyc=Regular      occ=Regular      ord=Regular     
+  logistic_r3.00         Regular  cyc=Regular      occ=Regular      ord=Regular     
+  logistic_r3.50         Regular  cyc=Regular      occ=Regular      ord=Regular     
+  logistic_r3.57         Chaos    cyc=Regular      occ=Regular      ord=Regular     
+  logistic_r3.70         Chaos    cyc=Chaos        occ=Chaos        ord=Chaos       
+  logistic_r3.90         Chaos    cyc=Chaos        occ=Chaos        ord=Chaos       
+  logistic_r4.00         Chaos    cyc=Chaos        occ=Chaos        ord=Chaos       
+  henon_x_a1.4           Chaos    cyc=Chaos        occ=Chaos        ord=Chaos       
+  henon_y_a1.4           Chaos    cyc=Chaos        occ=Chaos        ord=Chaos       
+  henon_x_a1.1           Chaos    cyc=Chaos        occ=Chaos        ord=Chaos       
+  henon_x_a1.3           Regular  cyc=Regular      occ=Regular      ord=Regular     
+  lorenz_x_rho28         Chaos    cyc=Chaos        occ=Chaos        ord=Chaos       
+  lorenz_y_rho28         Chaos    cyc=Chaos        occ=Chaos        ord=Chaos       
+  lorenz_z_rho28         Chaos    cyc=Chaos        occ=Chaos        ord=Chaos       
+  lorenz_x_rho10         Regular  cyc=Regular      occ=Regular      ord=Regular     
+  rossler_x_c5.7         Chaos    cyc=Chaos        occ=Chaos        ord=Chaos       
+  rossler_y_c5.7         Chaos    cyc=Chaos        occ=Chaos        ord=Chaos       
+  rossler_x_c2.5         Regular  cyc=Regular      occ=Regular      ord=Regular     
+  chua_x                 Chaos    cyc=Noise        occ=Chaos        ord=Chaos       
+  chua_y                 Chaos    cyc=Chaos        occ=Chaos        ord=Chaos       
+  white_noise_1          Noise    cyc=Noise        occ=Noise        ord=Noise       
+  white_noise_2          Noise    cyc=Noise        occ=Noise        ord=Noise       
+  white_noise_3          Noise    cyc=Noise        occ=Noise        ord=Noise       
+  white_uniform          Noise    cyc=Noise        occ=Noise        ord=Noise       
+  student_t3             Noise    cyc=Noise        occ=Noise        ord=Noise       
+  ar1_phi0.3             Noise    cyc=Noise        occ=Noise        ord=Noise       
+  ar1_phi0.7             Noise    cyc=Noise        occ=Noise        ord=Noise       
+  ar1_phi0.9             Noise    cyc=Noise        occ=Noise        ord=Noise       
+  arma22                 Noise    cyc=Noise        occ=Noise        ord=Noise       
+  random_walk            Noise    cyc=Noise        occ=Noise        ord=Noise       
+  garch_returns          Noise    cyc=Noise        occ=Noise        ord=Noise       
+  garch_volatility       Noise    cyc=Chaos        occ=Chaos        ord=Noise       
+  fgn_h0.8               Noise    cyc=Noise        occ=Noise        ord=Noise       
+  sine_pure              Regular  cyc=Regular      occ=Regular      ord=Regular     
+  sine_plus_noise        Regular  cyc=Noise        occ=Noise        ord=Noise       
+  quasi_sine_sum         Regular  cyc=Regular      occ=Regular      ord=Regular     
+  circle_map_qp          Regular  cyc=Regular      occ=Regular      ord=Regular     
+  henon_SNR5dB           Mixed    cyc=NonlinStoch  occ=NonlinStoch  ord=NonlinStoch 
+  logistic_SNR5dB        Mixed    cyc=NonlinStoch  occ=NonlinStoch  ord=NonlinStoch 
+  henon_SNR10dB          Mixed    cyc=NonlinStoch  occ=NonlinStoch  ord=NonlinStoch 
+  logistic_SNR10dB       Mixed    cyc=NonlinStoch  occ=NonlinStoch  ord=NonlinStoch 
+  henon_SNR20dB          Mixed    cyc=Chaos        occ=Chaos        ord=Chaos       
+  logistic_SNR20dB       Mixed    cyc=Chaos        occ=Chaos        ord=Chaos       
+  iaaft_lorenz_x         Noise    cyc=Noise        occ=Noise        ord=Noise       
+  iaaft_henon_x          Noise    cyc=Noise        occ=Noise        ord=Noise       
+  shuffle_lorenz_x       Noise    cyc=Noise        occ=Noise        ord=Noise       
+
+--- STRICT scoring, Mixed cases excluded (40 series) ---
+  cyclotomic phases          36/40 = 90.0%
+  pair occupancy             37/40 = 92.5%
+  missing ordinal patterns   38/40 = 95.0%
+
+--- class-wise (strict) ---
+  Chaos    (n=14) cyc=12/14  occ=13/14  ordn=13/14  
+  Regular  (n=10) cyc=9/10  occ=9/10  ordn=9/10  
+  Noise    (n=16) cyc=15/16  occ=15/16  ordn=16/16  
+
+saved reviewer_e4_results.csv
+
+========================================================================
+E6  Lyapunov exponent of the logistic map near r = 3.57, with CI
+========================================================================
+Feigenbaum accumulation point r_inf = 3.569945672
+
+           r     lambda                 95% CI
+   3.5699000   -0.00379   [-0.00379, -0.00378]
+   3.5699457    0.00002   [ 0.00000,  0.00004]
+   3.5700000    0.01096   [ 0.01088,  0.01109]
+   3.5705000   -0.00388   [-0.00388, -0.00387]
+   3.5700000    0.01096   [ 0.01088,  0.01109]
+   3.5750000    0.08653   [ 0.08625,  0.08679]
+   3.5800000    0.10560   [ 0.10526,  0.10599]
+
+If the CI at r = 3.57 straddles zero, the v2 relabeling to 'Chaos' is not defensible
+and the case must be reported as indeterminate.

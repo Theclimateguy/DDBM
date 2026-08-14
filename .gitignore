@@ -2,6 +2,7 @@
 __pycache__/
 *.pyc
 *.log
+!v2/results/*.log
 
 # regenerated or downloaded data (see v2/build_dataset.py)
 v2/data_bench/series/
