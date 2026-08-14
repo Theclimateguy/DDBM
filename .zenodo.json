@@ -11,18 +11,18 @@
     }
   ],
   "keywords": [
+    "time series",
     "time series analysis",
-    "deterministic structure",
+    "nonlinear dynamics",
+    "chaos",
+    "symbolic dynamics",
     "surrogate data",
-    "ordinal patterns",
-    "distribution-free inference",
-    "Monte-Carlo calibration",
-    "IAAFT",
-    "normal scores",
-    "cyclotomic polynomials",
-    "negative results",
+    "permutation entropy",
+    "lyapunov exponent",
+    "hypothesis testing",
     "reproducibility",
-    "benchmark"
+    "benchmark",
+    "python"
   ],
   "license": "cc-by-4.0",
   "access_right": "open",

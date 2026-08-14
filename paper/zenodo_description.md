@@ -57,9 +57,28 @@ Code, run logs and manuscript sources:
 https://github.com/Theclimateguy/DDBM/tree/v2
 
 ## Keywords
-time series analysis; deterministic structure; surrogate data; ordinal patterns;
-distribution-free inference; Monte-Carlo calibration; IAAFT; normal scores;
-cyclotomic polynomials; negative results; reproducibility; benchmark
+
+Chosen against measured Zenodo usage rather than invented: each term below is
+already carried by other records, so it actually reaches a search. Counts are
+records using the term as a keyword, measured via the Zenodo API.
+
+Broad reach, all accurate for this work:
+time series (5172); time series analysis (1654); nonlinear dynamics (1748);
+chaos (1732); reproducibility (6291); benchmark (3379); python (7630)
+
+Narrow, targeting the niche:
+symbolic dynamics (183); surrogate data (38); permutation entropy (21);
+lyapunov exponent (144); hypothesis testing (254)
+
+Optional additions: negative results (185), IAAFT (18).
+
+Deliberately dropped, being effectively unused as keywords and therefore
+invisible to search: normal scores (0 records), Monte-Carlo calibration (2),
+distribution-free inference (4), deterministic structure (8), ordinal patterns
+(12), cyclotomic polynomials (31 — but those records are pure number theory, the
+wrong audience). Note also that Zenodo enforces no controlled vocabulary here:
+across 500 sampled records not one carried a controlled subject term, so
+keywords are free text and only prior usage makes them findable.
 
 ## Related identifiers
 - 10.5281/zenodo.18753233 — "is new version of"
